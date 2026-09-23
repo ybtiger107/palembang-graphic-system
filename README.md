@@ -77,7 +77,7 @@ The browser [Playground](implementations/web/README.md) lets you explore, custom
 - live Palembang preview, generated directly from the canonical tokens;
 - Standard / Custom / Wallpaper output modes, with practical resolution presets (Square, Medium, Wide, common device and desktop wallpaper sizes);
 - full palette customization across all six scene colors, including a curated palette gallery (Midnight, Ocean, Aurora, Desert, Rose, Monochrome, Obsidian, and more) alongside manual hex/swatch editing;
-- copyable share links that reproduce an exact design — no account or backend involved;
+- copyable share links that reproduce an exact design — open one to load and immediately remix it, no account or backend involved;
 - multiple named designs saved locally in your browser (save, rename, duplicate, delete);
 - design export/import as a small, human-readable JSON file;
 - SVG export and client-side PNG export;
@@ -158,6 +158,6 @@ This repository uses three licenses: source code is MIT-licensed; the reusable v
 
 ## Status
 
-**v0.3.0 — Palembang Playground: the first browser-based interactive release.**
+**v0.4.0 — Shareable Palembang.**
 
-Palembang can now be explored, customized, and exported directly in the browser at [ybtiger107.github.io/palembang-graphic-system](https://ybtiger107.github.io/palembang-graphic-system/) — no Figma, Python, or local tooling required. This release builds on v0.2.0's canonical system and verified SVG reference renderer, adding a deployed, dependency-free web Playground with cross-renderer parity against the Python implementation.
+Palembang designs can now be saved, shared, reopened, and remixed directly in the browser at [ybtiger107.github.io/palembang-graphic-system](https://ybtiger107.github.io/palembang-graphic-system/). This release adds persistent personal designs (multiple named local saves, rename/duplicate/delete) and portable, shareable design state (versioned share links and `.palembang.json` import/export) on top of v0.3.0's Playground — still no account, backend, or analytics involved.
