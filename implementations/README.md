@@ -2,10 +2,10 @@
 
 This directory is reserved for verified renderers and adapters.
 
-Planned homes:
+Platform homes:
 
 - `web/` — browser implementation, likely Canvas/WebGL/SVG depending on fidelity.
-- `svg/` — portable SVG renderer once Figma-transform conversion is validated.
+- `svg/` — dependency-light reference SVG renderer (`render.py`).
 - `swiftui/` — Apple-platform implementation.
 - `canvas/` — general 2D-canvas reference implementation.
 

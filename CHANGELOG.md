@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Added the dependency-light SVG reference renderer under `implementations/svg/`.
+- Added focused renderer checks for dimensions, normalized 50/50 geometry, token-derived gradients, layer order, deterministic output, and the 320 px haze exception.
+
 ## 0.2.0 — 2026-09-23
 
 Canonical raster asset preservation update.
