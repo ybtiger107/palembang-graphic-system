@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "status": "canonical-user-supplied-raster-assets",
+  "policy": {
+    "preserveBytes": true,
+    "preferredForDirectRasterUse": true,
+    "derivedOutputsDirectory": "../variants",
+    "note": "Nominal size is the corresponding Figma/source variant. actualPixelSize is the bitmap size received and preserved in this repository."
+  },
+  "assets": [
+    {
+      "file": "png/Palembang.png",
+      "variant": "small-square",
+      "role": "Small square canonical render",
+      "nominalFigmaCanvasSize": {
+        "width": 320,
+        "height": 320
+      },
+      "actualPixelSize": {
+        "width": 320,
+        "height": 320
+      },
+      "nominalAspectRatio": 1.0,
+      "actualAspectRatio": 1.0,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        254,
+        255
+      ],
+      "sha256": "984049c058c97908ea5da790fc9c4cff9c35ea46a43cfb8c412db0e4e852a24c",
+      "byteLength": 96298,
+      "embeddedMetadata": {
+        "dpi": [
+          72.009,
+          72.009
+        ],
+        "srgb": 0,
+        "gamma": 0.45455,
+        "Software": "Figma"
+      }
+    },
+    {
+      "file": "png/Palembang2560x1080.png",
+      "variant": "wide",
+      "role": "Wide canonical render",
+      "nominalFigmaCanvasSize": {
+        "width": 2560,
+        "height": 1080
+      },
+      "actualPixelSize": {
+        "width": 2048,
+        "height": 864
+      },
+      "nominalAspectRatio": 2.3703703703703702,
+      "actualAspectRatio": 2.3703703703703702,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        254,
+        255
+      ],
+      "sha256": "aa04d47bb5c710c5d3870497670ffb58e6abd8469158f566788495b588600d05",
+      "byteLength": 2203033,
+      "embeddedMetadata": {}
+    },
+    {
+      "file": "png/Palembang2560x1664.png",
+      "variant": "medium-wide",
+      "role": "Medium-wide canonical render",
+      "nominalFigmaCanvasSize": {
+        "width": 2560,
+        "height": 1664
+      },
+      "actualPixelSize": {
+        "width": 2048,
+        "height": 1331
+      },
+      "nominalAspectRatio": 1.5384615384615385,
+      "actualAspectRatio": 1.5386927122464313,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        254,
+        255
+      ],
+      "sha256": "62c80c91cd2f99a9c91b2df10fcb33ffe4053f9cd4a8e8fd533aad4599398876",
+      "byteLength": 3370677,
+      "embeddedMetadata": {}
+    },
+    {
+      "file": "png/Palembang2560x2560.png",
+      "variant": "large-square",
+      "role": "Large square canonical render",
+      "nominalFigmaCanvasSize": {
+        "width": 2560,
+        "height": 2560
+      },
+      "actualPixelSize": {
+        "width": 2048,
+        "height": 2048
+      },
+      "nominalAspectRatio": 1.0,
+      "actualAspectRatio": 1.0,
+      "format": "PNG",
+      "mode": "RGBA",
+      "alphaExtrema": [
+        254,
+        255
+      ],
+      "sha256": "0bfe030c3762f0244868376d1b7b8d2acdb1cf9020c452dc9697e5213a46638d",
+      "byteLength": 5166395,
+      "embeddedMetadata": {}
+    }
+  ]
+}

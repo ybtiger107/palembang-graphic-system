@@ -1,0 +1,31 @@
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node / web
+node_modules/
+dist/
+build/
+.cache/
+
+# Generated/local output
+.tmp/
+tmp/
+output/
+exports/
+coverage/
+
+# Secrets / local environment
+.env
+.env.*
+!.env.example
