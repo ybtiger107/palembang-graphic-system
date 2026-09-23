@@ -99,6 +99,18 @@ python3 implementations/svg/render.py \
 
 It reconstructs each target rectangle from the canonical tokens instead of stretching a bitmap. The renderer's source code is MIT-licensed; the SVG it generates is a usable output under CC BY 4.0 (see [Use Palembang](#use-palembang) above).
 
+### JavaScript Core SDK
+
+Render Palembang directly from JavaScript with the dependency-free `@palembang/core` package:
+
+```sh
+npm install @palembang/core
+```
+
+```js
+import { renderPalembangSvg } from "@palembang/core";
+```
+
 ## Canonical assets
 
 If you just need the official Palembang graphic, use these directly rather than recreating them:
@@ -136,7 +148,7 @@ Implementation status:
 |---|---|
 | [SVG reference renderer](implementations/svg/README.md) | implemented and verified |
 | [Web Playground](implementations/web/README.md) | implemented and deployed |
-| JavaScript Core SDK (`packages/core/`) | in development for planned v0.5.0 |
+| JavaScript Core SDK (`packages/core/`) | released as `@palembang/core` |
 | Canvas / SwiftUI | future work |
 
 ## Repository map
@@ -159,6 +171,6 @@ This repository uses three licenses: source code is MIT-licensed; the reusable v
 
 ## Status
 
-**v0.4.0 — Shareable Palembang.**
+**v0.5.0 — Palembang Developer SDK.**
 
-Palembang designs can now be saved, shared, reopened, and remixed directly in the browser at [ybtiger107.github.io/palembang-graphic-system](https://ybtiger107.github.io/palembang-graphic-system/). This release adds persistent personal designs (multiple named local saves, rename/duplicate/delete) and portable, shareable design state (versioned share links and `.palembang.json` import/export) on top of v0.3.0's Playground — still no account, backend, or analytics involved.
+Palembang can now be rendered directly from JavaScript using the dependency-free `@palembang/core` package, alongside the existing browser Playground and shareable design workflows.

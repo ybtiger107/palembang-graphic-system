@@ -1,10 +1,9 @@
 # Changelog
 
-## Unreleased — planned v0.5.0
+## 0.5.0 — 2026-09-23
 
-Developer SDK: the first reusable Palembang JavaScript Core SDK is prepared
-under `packages/core/` as `@palembang/core` v0.5.0. This is not yet a release;
-publication remains intentionally pending.
+Developer SDK: Palembang can now be rendered directly from JavaScript with the
+dependency-free `@palembang/core` package.
 
 ## 0.4.0 — 2026-09-23
 
