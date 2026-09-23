@@ -46,6 +46,10 @@ Appearance:
 
 Supported color tokens:
   sky.hot  sky.cool  sea.light  sea.dark  sea.haze  sea.glow
+
+Examples:
+  palembang render --size 1920x1080 -o palembang.svg
+  palembang render --size 1920x1080 --color sky.hot=#D97706 --no-attribution -o custom.svg
 `;
 
 function isDirectExecution() {
