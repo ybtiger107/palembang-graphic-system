@@ -12,6 +12,7 @@ import path from "node:path";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CSS = readFileSync(path.join(HERE, "../styles.css"), "utf8");
+const HTML = readFileSync(path.join(HERE, "../index.html"), "utf8");
 const APP_JS = readFileSync(path.join(HERE, "../app.js"), "utf8");
 
 /** Extract the declaration block for the first rule whose selector text matches `selectorRe`. */
@@ -29,6 +30,20 @@ function ruleBody(css, selectorRe) {
   }
   throw new Error("unterminated rule");
 }
+
+describe("Playground home link", () => {
+  test("only the visible Playground title links to the relative home path", () => {
+    assert.match(HTML, /<h1><a class="home-link" href="\.\/">Playground<\/a><\/h1>/);
+    assert.doesNotMatch(HTML, /<header[^>]*>\s*<a[\s\S]*<\/header>/);
+  });
+
+  test("home-link suppresses hyperlink styling without overriding focus-visible", () => {
+    const body = ruleBody(CSS, /\.home-link,\s*\n?\.home-link:visited,\s*\n?\.home-link:hover\s*\{/);
+    assert.match(body, /color:\s*inherit/);
+    assert.match(body, /text-decoration:\s*none/);
+    assert.match(CSS, /a:focus-visible,\s*\n?button:focus-visible,\s*\n?input:focus-visible\s*\{/);
+  });
+});
 
 describe("no fixed-width overflow traps in shrinkable containers", () => {
   test("no bare `repeat(N, 1fr)` grid track (auto min-size blocks shrinking below content)", () => {
