@@ -46,6 +46,19 @@ Full detail lives in:
 - [`docs/design-philosophy.md`](docs/design-philosophy.md) — why the system preserves what it preserves
 - [`tokens/palembang.v1.json`](tokens/palembang.v1.json) — machine-readable geometry, gradients, and color values
 
+## Generate Palembang
+
+The canonical PNGs are the right choice when a ready-made raster is sufficient. For a different resolution or aspect ratio, or for scalable vector output, use the [SVG reference renderer](implementations/svg/README.md):
+
+```sh
+python3 implementations/svg/render.py \
+  --width 2560 \
+  --height 1080 \
+  --output Palembang.svg
+```
+
+It reconstructs each target rectangle from the canonical tokens instead of stretching a bitmap.
+
 ## Canonical assets
 
 If you just need the official Palembang graphic, use these directly rather than recreating them:
@@ -77,7 +90,7 @@ SVG / Web / Canvas / SwiftUI implementations
 
 New platform implementations should be built from [`docs/specification.md`](docs/specification.md) and [`tokens/palembang.v1.json`](tokens/palembang.v1.json) — not approximated from screenshots of the canonical PNGs.
 
-The `implementations/svg`, `implementations/web`, `implementations/canvas`, and `implementations/swiftui` directories are placeholders for future renderers; none exist yet in this baseline.
+The [`implementations/svg`](implementations/svg/README.md) directory contains the first verified platform renderer. Web, Canvas, and SwiftUI adapters remain future work.
 
 ## Repository map
 
@@ -97,6 +110,6 @@ Source code in this repository is MIT-licensed. The artwork, photographs, Figma 
 
 ## Status
 
-**v0.1.0 — initial canonical public baseline.**
+**v0.2.0 — canonical system plus first verified SVG reference renderer.**
 
-This release contains the original artwork references, the Figma source, the canonical PNG assets, the design specification, and the machine-readable tokens. Platform implementations have not been built yet.
+This release contains the original artwork references, the Figma source, canonical PNG assets, the design specification, machine-readable tokens, and a token-driven SVG renderer for arbitrary dimensions.
