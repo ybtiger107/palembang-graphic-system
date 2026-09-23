@@ -24,6 +24,7 @@ tmp/
 output/
 exports/
 coverage/
+implementations/web/test/.parity-out/
 
 # Secrets / local environment
 .env

@@ -96,8 +96,13 @@ input:focus-visible {
   margin: 0 auto;
   padding: 0 1.5rem 3rem;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--gap);
+}
+
+.preview-pane,
+.controls-pane {
+  min-width: 0;
 }
 
 @media (min-width: 960px) {
@@ -111,7 +116,21 @@ input:focus-visible {
   }
 }
 
+/*
+ * The frame is the single source of aspect ratio: app.js sets
+ * `previewFrame.style.aspectRatio` to the selected output width/height, so
+ * the box itself becomes square/medium/wide/custom-shaped. The inner
+ * `.preview-svg` (and the generated <svg> within it) must fill that box at
+ * 100%/100% rather than imposing an aspect ratio of its own -- otherwise it
+ * letterboxes inside an oversized frame whenever the frame's ratio differs
+ * from a hard-coded one (this was the square/medium letterboxing bug).
+ */
 .preview-frame {
+  width: 100%;
+  max-width: 100%;
+  /* Default before app.js sets the real ratio inline (avoids a collapsed
+     0-height flash while tokens are still loading); overridden per render. */
+  aspect-ratio: 64 / 27;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--border);
@@ -119,7 +138,7 @@ input:focus-visible {
 }
 .preview-svg {
   width: 100%;
-  aspect-ratio: 64 / 27;
+  height: 100%;
   display: block;
 }
 .preview-svg svg {
@@ -158,11 +177,24 @@ input:focus-visible {
 .palette-grid {
   margin-top: 0.75rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* Bare `1fr` tracks default to `minmax(auto, 1fr)`: the track's floor is
+     each item's content-based min size, so the grid refuses to shrink below
+     that and overflows the viewport instead of wrapping (this was the
+     mobile "palette cut off on the right" bug). `minmax(0, 1fr)` lets the
+     tracks shrink to the container; the single-column fallback below keeps
+     each card legible once two tracks would get too narrow to use. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.9rem 1rem;
 }
 
+@media (max-width: 640px) {
+  .palette-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .palette-row {
+  min-width: 0;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 0.6rem 0.7rem;
@@ -251,6 +283,7 @@ input:focus-visible {
 }
 .dimension-row label {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
@@ -258,6 +291,8 @@ input:focus-visible {
   color: var(--text-muted);
 }
 .dimension-row input {
+  width: 100%;
+  min-width: 0;
   font-size: 0.95rem;
   padding: 0.45rem 0.55rem;
   border-radius: 6px;
