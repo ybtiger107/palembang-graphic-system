@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palembang Playground</title>
+<meta name="description" content="Explore and export the Palembang Graphic System: recolor the canonical palette, choose a format, and download SVG/PNG under CC BY 4.0.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#controls-heading">Skip to controls</a>
+
+<header class="site-header">
+  <p class="eyebrow">Palembang Graphic System</p>
+  <h1>Playground</h1>
+  <p class="tagline">Make it yours without losing what makes it Palembang.</p>
+</header>
+
+<main class="layout">
+  <section class="preview-pane" aria-label="Live preview">
+    <div id="previewFrame" class="preview-frame">
+      <div id="preview" class="preview-svg" role="img" aria-label="Live Palembang graphic preview"></div>
+    </div>
+    <p id="previewCaption" class="preview-caption" aria-live="polite"></p>
+  </section>
+
+  <aside class="controls-pane">
+    <form id="controls">
+
+      <section class="control-group">
+        <h2 id="controls-heading">Palette</h2>
+        <p class="control-hint">Six scene colors. Geometry, gradients, and layer order stay fixed.</p>
+        <div id="paletteGrid" class="palette-grid"></div>
+        <button type="button" id="resetPalette" class="ghost-button">Reset palette to original</button>
+      </section>
+
+      <section class="control-group">
+        <h2>Format</h2>
+        <div id="presetRow" class="preset-row"></div>
+        <div class="dimension-row">
+          <label>
+            <span>Width</span>
+            <input type="number" id="widthInput" min="16" max="6000" step="1" inputmode="numeric">
+          </label>
+          <label>
+            <span>Height</span>
+            <input type="number" id="heightInput" min="16" max="6000" step="1" inputmode="numeric">
+          </label>
+        </div>
+        <p class="control-hint">Custom width/height reconstructs both halves at the new ratio — nothing is cropped or stretched.</p>
+      </section>
+
+      <section class="control-group">
+        <h2>Export</h2>
+        <div class="export-row">
+          <button type="button" id="exportSvg" class="primary-button">Download SVG</button>
+          <button type="button" id="exportPng" class="primary-button">Download PNG</button>
+        </div>
+        <p id="exportStatus" class="control-hint" aria-live="polite"></p>
+      </section>
+
+      <button type="button" id="canonicalReset" class="reset-button">Restore canonical Palembang</button>
+    </form>
+  </aside>
+</main>
+
+<footer class="attribution">
+  <h2>Use Palembang</h2>
+  <p>Generated graphics are available under
+    <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener" target="_blank">CC BY 4.0</a> —
+    free to use, recolor, and adapt, commercially or non-commercially, with attribution.
+  </p>
+  <pre id="attributionText" class="attribution-text">Palembang Graphic System — ybtiger107
+https://github.com/ybtiger107/palembang-graphic-system
+CC BY 4.0</pre>
+  <div class="attribution-actions">
+    <button type="button" id="copyAttribution" class="ghost-button">Copy attribution</button>
+    <a class="ghost-link" href="https://github.com/ybtiger107/palembang-graphic-system/blob/main/VISUAL-LICENSE.md" target="_blank" rel="noopener">Licensing details</a>
+    <span id="copyStatus" class="copy-status" aria-live="polite"></span>
+  </div>
+  <p class="disclaimer">This is an unofficial playground for the Palembang Graphic System. Attribution does not imply endorsement of your project.</p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+name: Deploy Playground to GitHub Pages
+
+# Prepared but intentionally not yet relied upon for a live deployment.
+# Enabling GitHub Pages (Settings -> Pages -> Source: GitHub Actions) is a
+# separate, explicit step; see implementations/web/README.md.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "implementations/web/**"
+      - "tokens/palembang.v1.json"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run Playground unit tests
+        run: node --test implementations/web/test/
+
+      - name: Assemble static site
+        run: |
+          set -euo pipefail
+          rm -rf dist
+          mkdir -p dist
+          # Copy the Playground source as the Pages site root so it works
+          # under the /palembang-graphic-system/ project-site base path.
+          cp -r implementations/web/. dist/
+          rm -rf dist/test dist/package.json
+          # Co-locate a copy of the canonical tokens next to the deployed
+          # page; palembang.js's loadTokens() tries this path first. See
+          # implementations/web/README.md ("Token loading on GitHub Pages").
+          mkdir -p dist/tokens
+          cp tokens/palembang.v1.json dist/tokens/palembang.v1.json
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

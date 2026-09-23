@@ -1,0 +1,10 @@
+{
+  "name": "palembang-playground",
+  "private": true,
+  "type": "module",
+  "description": "Static Palembang Graphic System Playground. No dependencies; ES modules loaded directly by the browser. This file exists so Node (tests, parity checks) treats .js files here as ES modules.",
+  "scripts": {
+    "test": "node --test test/",
+    "parity": "node test/generate-js-svg.mjs"
+  }
+}

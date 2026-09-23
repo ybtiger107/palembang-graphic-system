@@ -11,6 +11,12 @@ its composition, horizon, and light preserved; its palette and texture free to c
 
 <img src="assets/canonical/png/Palembang2560x1080.png" alt="Palembang canonical graphic: a calm horizon dividing a warm, right-biased sunset sky from a layered sea" width="100%">
 
+<br><br>
+
+**Playground — coming in v0.3.0** &nbsp;·&nbsp;
+[Download v0.2.0](https://github.com/ybtiger107/palembang-graphic-system/releases/tag/v0.2.0) &nbsp;·&nbsp;
+[Read Specification](docs/specification.md)
+
 </div>
 
 <br>
