@@ -1,17 +1,18 @@
 # Changelog
 
-## Unreleased — planned v0.3.0
+## 0.3.0 — 2026-09-23
 
-Palembang Playground: a static browser tool to explore, recolor, and export the graphic system.
+Palembang Playground: the first browser-based interactive release. Palembang can now be explored, customized, and exported directly in the browser at https://ybtiger107.github.io/palembang-graphic-system/.
 
-- Added `implementations/web/`: a dependency-free static web app (HTML/CSS/ES modules, no framework, no backend).
-- Added `palembang.js`, a browser-side renderer ported line-for-line from `implementations/svg/render.py`'s gradient-transform math, so both renderers describe the same canonical scene.
-- Added a live preview, palette editor (six scene tokens with hex/swatch inputs and per-session reset), format presets (Square/Medium/Wide, matching the canonical source variants) plus custom width/height, client-side SVG export, and client-side PNG export rasterized from the exported SVG.
-- Added a cross-renderer parity check (`implementations/web/test/parity_check.py`) comparing Python- and browser-generated SVGs for dimensions, gradient transforms, stops, opacity, and layer order across representative sizes and a palette override.
-- Added Node-based unit tests for the browser renderer (`implementations/web/test/`), mirroring the existing Python renderer tests.
-- Added a GitHub Actions Pages workflow (`.github/workflows/pages.yml`), prepared but not yet enabled/deployed.
-- Runtime palette edits never modify `tokens/palembang.v1.json` on disk; exported SVG/PNG graphics remain CC BY 4.0 per `VISUAL-LICENSE.md`. No protected canonical asset is bundled into the Playground or its exports.
-- Updated the root `README.md` with a "Playground — coming in v0.3.0" entry point (not yet a live link).
+- Added the live browser Playground (`implementations/web/`) — a dependency-free static web app, no framework, no backend.
+- Added a token-driven browser SVG renderer (`palembang.js`) ported line-for-line from `implementations/svg/render.py`'s gradient-transform math, with a cross-renderer parity check confirming both renderers produce matching dimensions, gradient transforms, stops, opacity, and layer order.
+- Added live six-color palette editing (hex + swatch inputs, per-token and full reset), applied at render time without modifying `tokens/palembang.v1.json` on disk.
+- Added Standard / Custom / Wallpaper output workflows: Standard presets (Square, Medium, Wide) derive height from width automatically; Custom unlocks independent width/height; Wallpaper offers practical device and desktop resolution presets (phone, tablet, desktop FHD/QHD/4K, ultrawide).
+- Added a responsive mobile layout (no horizontal overflow, single-column controls, preview tracks the selected aspect ratio with no letterboxing).
+- Added client-side SVG export and client-side PNG export (rasterized from the same exported SVG, so the two stay visually aligned) — no server round-trip.
+- Added `localStorage` persistence for mode, format/wallpaper selection, dimensions, and palette overrides, so settings survive reloads or an accidental tab close; added a one-click reset to canonical Palembang that also clears saved settings.
+- Added GitHub Pages deployment (`.github/workflows/pages.yml`) under the `/palembang-graphic-system/` project path; the Playground is now live.
+- Preserved canonical geometry, gradient transforms, layer order, and Python ↔ JS renderer parity throughout. No protected canonical source asset (`reference/`, `source/`, `assets/canonical/`) changed.
 
 ## 0.2.0 — 2026-09-23
 

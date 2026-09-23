@@ -1,8 +1,8 @@
 name: Deploy Playground to GitHub Pages
 
-# Prepared but intentionally not yet relied upon for a live deployment.
-# Enabling GitHub Pages (Settings -> Pages -> Source: GitHub Actions) is a
-# separate, explicit step; see implementations/web/README.md.
+# Deployed since v0.3.0: https://ybtiger107.github.io/palembang-graphic-system/
+# GitHub Pages is enabled (Settings -> Pages -> Source: GitHub Actions); see
+# implementations/web/README.md for the deployed site structure.
 
 on:
   push:

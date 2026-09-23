@@ -6,8 +6,10 @@ six scene tokens, and export usable SVG/PNG graphics — without Figma,
 Python, or local tooling. Settings persist across reloads via
 `localStorage`.
 
-This is the first browser implementation referenced in the repository root
-[`README.md`](../../README.md#using-palembang) as "Web ... future work."
+This is the first browser implementation, deployed as of v0.3.0. See the
+repository root [`README.md`](../../README.md#playground) for the public
+entry point and the [`README.md`](../../README.md#using-palembang)
+implementation-status table.
 
 ## Architecture
 

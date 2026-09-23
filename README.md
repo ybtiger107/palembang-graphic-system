@@ -13,8 +13,8 @@ its composition, horizon, and light preserved; its palette and texture free to c
 
 <br><br>
 
-**Playground — coming in v0.3.0** &nbsp;·&nbsp;
-[Download v0.2.0](https://github.com/ybtiger107/palembang-graphic-system/releases/tag/v0.2.0) &nbsp;·&nbsp;
+[**Try Playground**](https://ybtiger107.github.io/palembang-graphic-system/) &nbsp;·&nbsp;
+[Latest Release](https://github.com/ybtiger107/palembang-graphic-system/releases/latest) &nbsp;·&nbsp;
 [Read Specification](docs/specification.md)
 
 </div>
@@ -68,6 +68,21 @@ CC BY 4.0
 
 This is different from the **original painting, the reference photographs in `reference/`, the Figma master (`source/Palembang.fig`), and the canonical master assets in `assets/canonical/`** — those remain all rights reserved; publishing this repository does not grant reuse rights to them. See [`VISUAL-LICENSE.md`](VISUAL-LICENSE.md) and [`ARTWORK-RIGHTS.md`](ARTWORK-RIGHTS.md).
 
+## Playground
+
+Try it live: **[ybtiger107.github.io/palembang-graphic-system](https://ybtiger107.github.io/palembang-graphic-system/)**
+
+The browser [Playground](implementations/web/README.md) lets you explore, customize, and export Palembang without installing anything:
+
+- live Palembang preview, generated directly from the canonical tokens;
+- Standard / Custom / Wallpaper output modes, with practical resolution presets (Square, Medium, Wide, common device and desktop wallpaper sizes);
+- full palette customization across all six scene colors;
+- SVG export and client-side PNG export;
+- settings persist in your browser (`localStorage`), so they survive reloads or an accidental tab close;
+- one-click reset back to canonical Palembang.
+
+Playground exports follow the same [CC BY 4.0](#use-palembang) terms as the SVG reference renderer.
+
 ## Generate Palembang
 
 The canonical PNGs are the right choice when a ready-made raster is sufficient. For a different resolution or aspect ratio, or for scalable vector output, use the [SVG reference renderer](implementations/svg/README.md):
@@ -112,7 +127,13 @@ SVG / Web / Canvas / SwiftUI implementations
 
 New platform implementations should be built from [`docs/specification.md`](docs/specification.md) and [`tokens/palembang.v1.json`](tokens/palembang.v1.json) — not approximated from screenshots of the canonical PNGs.
 
-The [`implementations/svg`](implementations/svg/README.md) directory contains the first verified platform renderer. Web, Canvas, and SwiftUI adapters remain future work.
+Implementation status:
+
+| Platform | Status |
+|---|---|
+| [SVG reference renderer](implementations/svg/README.md) | implemented and verified |
+| [Web Playground](implementations/web/README.md) | implemented and deployed |
+| Canvas / SwiftUI | future work |
 
 ## Repository map
 
@@ -123,7 +144,9 @@ assets/canonical/      preserved, ready-to-use PNG renders
 assets/variants/        derived/resized/recolored outputs
 docs/                  specification, design philosophy, implementation guide
 tokens/                machine-readable design tokens
-implementations/        platform renderers (placeholders for now)
+implementations/svg/    verified Python SVG reference renderer
+implementations/web/    deployed browser Playground (Standard/Custom/Wallpaper, palette, SVG/PNG export)
+implementations/        canvas/, swiftui/ remain placeholders for future work
 ```
 
 ## Rights & stewardship
@@ -132,6 +155,6 @@ This repository uses three licenses: source code is MIT-licensed; the reusable v
 
 ## Status
 
-**v0.2.0 — canonical system plus first verified SVG reference renderer.**
+**v0.3.0 — Palembang Playground: the first browser-based interactive release.**
 
-This release contains the original artwork references, the Figma source, canonical PNG assets, the design specification, machine-readable tokens, and a token-driven SVG renderer for arbitrary dimensions.
+Palembang can now be explored, customized, and exported directly in the browser at [ybtiger107.github.io/palembang-graphic-system](https://ybtiger107.github.io/palembang-graphic-system/) — no Figma, Python, or local tooling required. This release builds on v0.2.0's canonical system and verified SVG reference renderer, adding a deployed, dependency-free web Playground with cross-renderer parity against the Python implementation.
