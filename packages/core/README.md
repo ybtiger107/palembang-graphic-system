@@ -1,17 +1,21 @@
 # Palembang JavaScript Core SDK
 
-This is the provisional, dependency-free JavaScript rendering core for the
+This is the dependency-free JavaScript rendering core for the
 Palembang Graphic System. It renders canonical Palembang SVG directly from
 JavaScript in modern browsers and Node.js ES modules — without the Playground,
 DOM, Figma, Python, or a runtime token fetch.
 
-The package name and public registry identity are intentionally provisional for
-v0.5.0 development. It is private and is not published to npm.
+The public package identity is `@palembang/core`. Version 0.5.0 is prepared
+locally but has not been published to npm yet.
+
+```sh
+npm install @palembang/core
+```
 
 ## Usage
 
 ```js
-import { renderPalembangSvg } from "@palembang-graphic-system/core-local";
+import { renderPalembangSvg } from "@palembang/core";
 
 const svg = renderPalembangSvg({
   width: 1920,
@@ -44,7 +48,7 @@ The complete example is in [`examples/node.mjs`](examples/node.mjs):
 
 ```js
 import { writeFile } from "node:fs/promises";
-import { renderPalembangSvg } from "@palembang-graphic-system/core-local";
+import { renderPalembangSvg } from "@palembang/core";
 
 const svg = renderPalembangSvg({ width: 1920, height: 1080 });
 await writeFile("palembang.svg", svg, "utf8");
@@ -60,7 +64,7 @@ Use the same import from a native ES module. A short copy/paste example is in
 
 ```html
 <script type="module">
-  import { renderPalembangSvg } from "@palembang-graphic-system/core-local";
+  import { renderPalembangSvg } from "@palembang/core";
   document.querySelector("#preview").innerHTML = renderPalembangSvg({
     width: 1920,
     height: 1080,
@@ -84,7 +88,7 @@ The SDK code is MIT-licensed. The embedded Palembang visual-system data and
 generated SVG output remain under CC BY 4.0. See [`LICENSE.md`](LICENSE.md),
 the repository [`VISUAL-LICENSE.md`](../../VISUAL-LICENSE.md), and the
 attribution metadata behavior above. This API is pre-1.0 and may change before
-the public package name and registry publication are selected.
+the release is published.
 
 There are zero runtime dependencies. The package does not include reference
 photographs, original artwork, Figma source, extracted source assets,

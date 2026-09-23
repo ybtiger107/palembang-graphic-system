@@ -1,8 +1,7 @@
 {
-  "name": "@palembang-graphic-system/core-local",
-  "version": "0.5.0-dev.0",
-  "private": true,
-  "description": "Provisional local Palembang JavaScript Core SDK; registry identity pending.",
+  "name": "@palembang/core",
+  "version": "0.5.0",
+  "description": "Dependency-free JavaScript Core SDK for rendering the Palembang Graphic System.",
   "type": "module",
   "exports": {
     ".": {
@@ -16,6 +15,18 @@
     "README.md",
     "LICENSE.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ybtiger107/palembang-graphic-system.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/ybtiger107/palembang-graphic-system/tree/main/packages/core#readme",
+  "bugs": {
+    "url": "https://github.com/ybtiger107/palembang-graphic-system/issues"
+  },
   "engines": {
     "node": ">=20"
   },

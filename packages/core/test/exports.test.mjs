@@ -11,12 +11,12 @@ const PACKAGE_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 test("public package exports import from a clean temporary consumer", () => {
   const temp = mkdtempSync(path.join(os.tmpdir(), "palembang-core-consumer-"));
   try {
-    const packageLink = path.join(temp, "node_modules", "@palembang-graphic-system", "core-local");
+    const packageLink = path.join(temp, "node_modules", "@palembang", "core");
     mkdirSync(path.dirname(packageLink), { recursive: true });
     symlinkSync(PACKAGE_DIR, packageLink, "dir");
     const result = spawnSync(
       process.execPath,
-      ["--input-type=module", "-e", 'import { renderPalembangSvg } from "@palembang-graphic-system/core-local"; const svg = renderPalembangSvg({ width: 320, height: 320 }); if (!svg.includes("<svg") || !svg.includes("<metadata>")) process.exit(1);'],
+      ["--input-type=module", "-e", 'import { renderPalembangSvg } from "@palembang/core"; const svg = renderPalembangSvg({ width: 320, height: 320 }); if (!svg.includes("<svg") || !svg.includes("<metadata>")) process.exit(1);'],
       { cwd: temp, encoding: "utf8" }
     );
     assert.equal(result.status, 0, result.stderr);

@@ -2,9 +2,9 @@
 
 ## Unreleased — planned v0.5.0
 
-Developer SDK: the first reusable Palembang JavaScript Core SDK is being
-developed under `packages/core/`. This is not a release; the public package
-name and registry identity remain undecided.
+Developer SDK: the first reusable Palembang JavaScript Core SDK is prepared
+under `packages/core/` as `@palembang/core` v0.5.0. This is not yet a release;
+publication remains intentionally pending.
 
 ## 0.4.0 — 2026-09-23
 
