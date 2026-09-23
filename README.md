@@ -174,3 +174,9 @@ This repository uses three licenses: source code is MIT-licensed; the reusable v
 **v0.5.0 — Palembang Developer SDK.**
 
 Palembang can now be rendered directly from JavaScript using the dependency-free `@palembang/core` package, alongside the existing browser Playground and shareable design workflows.
+
+**v0.6.0 — CLI & Automation (planned).**
+
+The official `@palembang/cli` package is being prepared for deterministic SVG
+rendering from terminals, servers, shell scripts, and CI through
+`@palembang/core`. The current stable release remains v0.5.0.

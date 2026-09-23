@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — planned v0.6.0
+
+CLI & Automation: planned official `@palembang/cli` package for deterministic
+SVG rendering from terminals, servers, shell scripts, and CI through
+`@palembang/core`.
+
 ## 0.5.0 — 2026-09-23
 
 Developer SDK: Palembang can now be rendered directly from JavaScript with the
