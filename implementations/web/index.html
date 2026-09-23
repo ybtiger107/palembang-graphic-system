@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Palembang Playground</title>
-<meta name="description" content="Explore and export the Palembang Graphic System: choose a format or wallpaper size, recolor the canonical palette, and download SVG/PNG under CC BY 4.0.">
+<meta name="description" content="Explore, save, and share the Palembang Graphic System: choose a format or wallpaper size, recolor the canonical palette, and download or share SVG/PNG under CC BY 4.0.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,6 +22,7 @@
       <div id="preview" class="preview-svg" role="img" aria-label="Live Palembang graphic preview"></div>
     </div>
     <p id="previewCaption" class="preview-caption" aria-live="polite"></p>
+    <p id="shareNotice" class="share-notice" hidden>Shared design loaded — now yours to edit.</p>
   </section>
 
   <aside class="controls-pane">
@@ -63,24 +64,59 @@
       <section class="control-group">
         <h2>Palette</h2>
         <p class="control-hint">Six scene colors. Geometry, gradients, and layer order stay fixed.</p>
+
+        <div id="paletteGallery" class="palette-gallery" role="group" aria-label="Curated palette presets"></div>
+
         <div id="paletteGrid" class="palette-grid"></div>
         <button type="button" id="resetPalette" class="ghost-button">Reset palette to original</button>
       </section>
 
       <section class="control-group">
-        <h2>Export</h2>
+        <h2>Saved Designs</h2>
+        <p class="control-hint">Stored in this browser only — nothing is uploaded.</p>
+        <button type="button" id="saveDesign" class="ghost-button">Save current</button>
+        <ul id="savedDesignsList" class="saved-designs-list"></ul>
+        <p id="savedDesignsEmpty" class="control-hint">No saved designs yet.</p>
+        <p id="savedDesignsStatus" class="control-hint" aria-live="polite"></p>
+      </section>
+
+      <section class="control-group">
+        <h2>Share &amp; Export</h2>
+
+        <div class="share-row">
+          <button type="button" id="copyShareLink" class="primary-button">Copy share link</button>
+        </div>
+        <input type="text" id="shareLinkField" class="share-link-field" readonly aria-label="Share link" placeholder="Click “Copy share link” to generate one">
+        <p id="shareStatus" class="control-hint" aria-live="polite"></p>
+
         <div class="export-row">
           <button type="button" id="exportSvg" class="primary-button">Download SVG</button>
           <button type="button" id="exportPng" class="primary-button">Download PNG</button>
         </div>
+        <div class="export-row">
+          <button type="button" id="exportDesignJson" class="ghost-button">Export design JSON</button>
+          <button type="button" id="importDesignJsonTrigger" class="ghost-button">Import design JSON</button>
+          <input type="file" id="importDesignJsonInput" accept="application/json,.json" hidden>
+        </div>
         <p id="exportStatus" class="control-hint" aria-live="polite"></p>
       </section>
 
-      <button type="button" id="canonicalReset" class="reset-button">Reset everything to canonical Palembang</button>
-      <p class="control-hint">Also clears your saved Playground settings on this device.</p>
+      <button type="button" id="canonicalReset" class="reset-button">Reset current design to canonical Palembang</button>
+      <p class="control-hint">Restores the canonical palette and format for the design you're editing now. Your saved designs below are not affected.</p>
     </form>
   </aside>
 </main>
+
+<dialog id="renameDialog">
+  <form method="dialog" id="renameForm">
+    <label for="renameInput">Rename design</label>
+    <input type="text" id="renameInput" maxlength="60" required>
+    <div class="dialog-actions">
+      <button type="button" id="renameCancel" class="ghost-button">Cancel</button>
+      <button type="submit" id="renameConfirm" class="primary-button">Save</button>
+    </div>
+  </form>
+</dialog>
 
 <footer class="attribution">
   <h2>Use Palembang</h2>
@@ -96,7 +132,7 @@ CC BY 4.0</pre>
     <a class="ghost-link" href="https://github.com/ybtiger107/palembang-graphic-system/blob/main/VISUAL-LICENSE.md" target="_blank" rel="noopener">Licensing details</a>
     <span id="copyStatus" class="copy-status" aria-live="polite"></span>
   </div>
-  <p class="disclaimer">This is an unofficial playground for the Palembang Graphic System. Attribution does not imply endorsement of your project. Format, palette, and mode choices are saved in this browser only (localStorage) — nothing is sent to a server.</p>
+  <p class="disclaimer">This is an unofficial playground for the Palembang Graphic System. Attribution does not imply endorsement of your project. Format, palette, saved designs, and share links only ever contain design state — nothing is sent to a server, and settings are saved in this browser only (localStorage).</p>
 </footer>
 
 <script type="module" src="app.js"></script>

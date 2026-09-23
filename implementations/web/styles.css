@@ -152,6 +152,12 @@ input:focus-visible {
   font-size: 0.85rem;
   text-align: center;
 }
+.share-notice {
+  margin: 0.35rem 0 0;
+  color: var(--focus);
+  font-size: 0.8rem;
+  text-align: center;
+}
 
 .controls-pane form {
   display: flex;
@@ -174,8 +180,40 @@ input:focus-visible {
   color: var(--text-muted);
 }
 
-.palette-grid {
+.palette-gallery {
   margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.palette-swatch {
+  width: 3.6rem;
+  height: 3.6rem;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.25rem;
+  position: relative;
+  overflow: hidden;
+}
+.palette-swatch:hover,
+.palette-swatch:focus-visible {
+  border-color: var(--accent);
+}
+.palette-swatch-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1.1;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  text-align: left;
+}
+
+.palette-grid {
+  margin-top: 1rem;
   display: grid;
   /* Bare `1fr` tracks default to `minmax(auto, 1fr)`: the track's floor is
      each item's content-based min size, so the grid refuses to shrink below
@@ -377,11 +415,28 @@ input:focus-visible {
   cursor: default;
 }
 
+.share-row,
 .export-row {
   margin-top: 0.75rem;
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
+}
+
+.share-link-field {
+  margin-top: 0.6rem;
+  width: 100%;
+  min-width: 0;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-raised);
+  color: var(--text-muted);
+}
+.share-link-field:focus {
+  color: var(--text);
 }
 
 button {
@@ -431,6 +486,101 @@ button {
 .reset-button:hover {
   color: var(--text);
   border-color: var(--focus);
+}
+
+.saved-designs-list {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.saved-design-row {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.saved-design-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.saved-design-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.saved-design-meta {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: ui-monospace, monospace;
+}
+.saved-design-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.saved-design-action {
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.74rem;
+}
+.saved-design-action:hover {
+  color: var(--text);
+  border-color: var(--focus);
+}
+.saved-design-action.danger:hover {
+  color: #ffb4a8;
+  border-color: #c0473a;
+}
+
+dialog#renameDialog {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  color: var(--text);
+  padding: 1.25rem;
+  max-width: 24rem;
+  width: calc(100% - 2.5rem);
+}
+dialog#renameDialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+#renameForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+#renameForm label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+#renameInput {
+  width: 100%;
+  min-width: 0;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg);
+  color: var(--text);
+}
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
 }
 
 .attribution {

@@ -115,3 +115,36 @@ describe("preview frame tracks the selected aspect ratio (no letterboxing)", () 
     assert.doesNotMatch(APP_JS, /\bels\.preview\.style\.aspectRatio/);
   });
 });
+
+describe("v0.4.0 sharing/saved-designs controls don't reintroduce overflow", () => {
+  test(".palette-gallery wraps its swatches instead of forcing width", () => {
+    const body = ruleBody(CSS, /\.palette-gallery\s*\{/);
+    assert.match(body, /flex-wrap:\s*wrap/);
+  });
+
+  test(".saved-design-row and its action buttons wrap and can shrink", () => {
+    const rowBody = ruleBody(CSS, /\.saved-design-row\s*\{/);
+    assert.match(rowBody, /flex-wrap:\s*wrap/);
+    assert.match(rowBody, /min-width:\s*0/);
+    const infoBody = ruleBody(CSS, /\.saved-design-info\s*\{/);
+    assert.match(infoBody, /min-width:\s*0/);
+    const actionsBody = ruleBody(CSS, /\.saved-design-actions\s*\{/);
+    assert.match(actionsBody, /flex-wrap:\s*wrap/);
+  });
+
+  test(".share-link-field can shrink to its container", () => {
+    const body = ruleBody(CSS, /\.share-link-field\s*\{/);
+    assert.match(body, /width:\s*100%/);
+    assert.match(body, /min-width:\s*0/);
+  });
+
+  test("the rename dialog is capped relative to viewport width, not a fixed px width", () => {
+    const body = ruleBody(CSS, /dialog#renameDialog\s*\{/);
+    assert.match(body, /max-width:\s*[\d.]+rem/);
+    assert.match(body, /width:\s*calc\(100% - [\d.]+rem\)/);
+  });
+
+  test("no new bare `repeat(N, 1fr)` grid track was introduced", () => {
+    assert.doesNotMatch(CSS, /repeat\(\s*\d+\s*,\s*1fr\s*\)/);
+  });
+});

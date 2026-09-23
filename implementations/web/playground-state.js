@@ -30,7 +30,7 @@ export function clampDimension(value) {
   return Math.min(MAX_DIMENSION, Math.max(MIN_DIMENSION, rounded));
 }
 
-function isFiniteNumber(value) {
+export function isFiniteNumber(value) {
   return typeof value === "number" && Number.isFinite(value);
 }
 

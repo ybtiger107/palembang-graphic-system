@@ -76,12 +76,15 @@ The browser [Playground](implementations/web/README.md) lets you explore, custom
 
 - live Palembang preview, generated directly from the canonical tokens;
 - Standard / Custom / Wallpaper output modes, with practical resolution presets (Square, Medium, Wide, common device and desktop wallpaper sizes);
-- full palette customization across all six scene colors;
+- full palette customization across all six scene colors, including a curated palette gallery (Midnight, Ocean, Aurora, Desert, Rose, Monochrome, Obsidian, and more) alongside manual hex/swatch editing;
+- copyable share links that reproduce an exact design — no account or backend involved;
+- multiple named designs saved locally in your browser (save, rename, duplicate, delete);
+- design export/import as a small, human-readable JSON file;
 - SVG export and client-side PNG export;
-- settings persist in your browser (`localStorage`), so they survive reloads or an accidental tab close;
-- one-click reset back to canonical Palembang.
+- settings and saved designs persist in your browser (`localStorage`), so they survive reloads or an accidental tab close;
+- one-click reset back to canonical Palembang for the design you're currently editing (saved designs are untouched).
 
-Playground exports follow the same [CC BY 4.0](#use-palembang) terms as the SVG reference renderer.
+Playground exports and shared designs follow the same [CC BY 4.0](#use-palembang) terms as the SVG reference renderer. See [`implementations/web/README.md`](implementations/web/README.md) for the full sharing/saved-designs model and privacy details.
 
 ## Generate Palembang
 

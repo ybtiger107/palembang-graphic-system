@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased — planned v0.4.0
+
+"Shareable Palembang": designs can now be saved, shared, reopened, and remixed — still a fully static, backend-free app (no accounts, no cloud sync, no server, no analytics).
+
+- Added shareable URL state: "Copy share link" encodes the current design (mode, format/preset/dimensions, palette overrides) into a compact, versioned, URL-safe `#ps=...` fragment (share schema v1, `implementations/web/share.js`). Opening a shared link loads the exact design as an immediately editable fork; a subtle "Shared design loaded" note appears near the preview, and the link does not overwrite your existing last-session design in this browser until you actually change or save something.
+- Added URL-state precedence on load: a valid shared link wins over your last local session, which wins over canonical defaults.
+- Added a curated palette gallery (`implementations/web/palettes.js`): Original, Midnight, Ocean, Aurora, Desert, Rose, Monochrome, Obsidian — each a deliberately designed, complete six-color set; a preset changes colors only, never geometry.
+- Added multiple locally saved Palembang designs ("Saved Designs" section, `implementations/web/designs.js`, stored under the new `palembang-saved:v1` key, separate from the existing `palembang-playground:v1` last-session key): save current, rename, duplicate, delete, and share any saved design.
+- Added design export/import as a small, versioned, human-readable JSON file (`*.palembang.json`); malformed or unsupported files are rejected with a clear error and never alter the current design.
+- Preserved compatibility with existing v0.3.0 `palembang-playground:v1` sessions; the new saved-designs key is additive and starts empty for existing users.
+- Clarified reset semantics: "Reset everything to canonical Palembang" resets only the current working design and its last-session entry — it never deletes saved designs.
+- Added extensive unit test coverage for the new share/palette/saved-design/JSON logic, kept pure and DOM-independent; renderer math, tokens, and Python ↔ JS parity are unchanged.
+- No protected canonical source asset (`reference/`, `source/`, `assets/canonical/`) is included in share links, saved designs, or exported/imported JSON files.
+
 ## 0.3.0 — 2026-09-23
 
 Palembang Playground: the first browser-based interactive release. Palembang can now be explored, customized, and exported directly in the browser at https://ybtiger107.github.io/palembang-graphic-system/.
