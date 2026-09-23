@@ -33,7 +33,7 @@ jobs:
           node-version: "24"
 
       - name: Run Playground unit tests
-        run: node --test implementations/web/test/
+        run: node --test implementations/web/test/*.test.mjs
 
       - name: Assemble static site
         run: |
