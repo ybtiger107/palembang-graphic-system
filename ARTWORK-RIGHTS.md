@@ -18,13 +18,21 @@ A gift of a physical painting is not, by itself, a transfer of copyright in the 
 
 ## Repository use
 
-Publishing this repository publicly, including the reference photographs and canonical assets, is not a grant of permission to reproduce, redistribute, sell, sublicense, or otherwise commercially use the original artwork or its derived visual assets. See [`LICENSE.md`](LICENSE.md) for how the code license and the visual materials are separated.
+Publishing this repository publicly, including the reference photographs and canonical assets, is not a grant of permission to reproduce, redistribute, sell, sublicense, or otherwise commercially use the original artwork or its derived visual assets. See [`LICENSE.md`](LICENSE.md) for how the code license, the open visual system, and the protected canonical materials are separated.
+
+## The open visual license and this document
+
+As of v0.2.0, the maintainer publishes the reusable digital Palembang visual system — the specification, tokens, and outputs of official renderers — under CC BY 4.0. See [`VISUAL-LICENSE.md`](VISUAL-LICENSE.md) for exact scope.
+
+That grant is limited to the rights the maintainer is legally able to license in the digital design translation described above. It does not extend to, and does not change the status of, the original physical painting, the reference photographs, `source/Palembang.fig`, `source/extracted/`, or the canonical PNG masters, all of which remain all rights reserved under this document and [`LICENSE.md`](LICENSE.md). The gift of the physical painting to the maintainer did not by itself transfer copyright in it, and the maintainer does not claim authorship of the original painting.
 
 ## Original artist reclamation
 
 If the original artist ever encounters this project, identifies themselves to the maintainer in a way the maintainer credibly believes, and wishes to reclaim or formalize rights in the original artwork, the maintainer intends to cooperate with them in good faith — including returning or transferring whatever rights in the artwork the maintainer is legally able to return or transfer, to the extent of the maintainer's legally held rights.
 
 This is a personal commitment by the maintainer, made because the artist may never be reachable through any other means. It does not create rights for, or obligations toward, anyone other than the original artist, and it does not override applicable copyright law.
+
+Any CC BY 4.0 license already validly granted to a user under [`VISUAL-LICENSE.md`](VISUAL-LICENSE.md) before such a transfer is not intended to be withdrawn by it; a later transfer of rights is subject to licenses the maintainer already validly granted.
 
 ## Privacy
 

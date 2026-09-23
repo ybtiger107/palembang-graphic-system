@@ -46,6 +46,22 @@ Full detail lives in:
 - [`docs/design-philosophy.md`](docs/design-philosophy.md) — why the system preserves what it preserves
 - [`tokens/palembang.v1.json`](tokens/palembang.v1.json) — machine-readable geometry, gradients, and color values
 
+## Use Palembang
+
+Palembang is meant to be used — in apps, websites, backgrounds, games, publications, and other creative work, including commercial projects.
+
+Graphics you generate with the [SVG reference renderer](implementations/svg/README.md), or download as SVG/PNG assets from a GitHub Release, are licensed under **[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)**: free to use, copy, redistribute, recolor, and adapt, commercially or non-commercially, with attribution. See [`VISUAL-LICENSE.md`](VISUAL-LICENSE.md) for the full scope and examples.
+
+Attribution example:
+
+```
+Palembang Graphic System — ybtiger107
+https://github.com/ybtiger107/palembang-graphic-system
+CC BY 4.0
+```
+
+This is different from the **original painting, the reference photographs in `reference/`, the Figma master (`source/Palembang.fig`), and the canonical master assets in `assets/canonical/`** — those remain all rights reserved; publishing this repository does not grant reuse rights to them. See [`VISUAL-LICENSE.md`](VISUAL-LICENSE.md) and [`ARTWORK-RIGHTS.md`](ARTWORK-RIGHTS.md).
+
 ## Generate Palembang
 
 The canonical PNGs are the right choice when a ready-made raster is sufficient. For a different resolution or aspect ratio, or for scalable vector output, use the [SVG reference renderer](implementations/svg/README.md):
@@ -57,7 +73,7 @@ python3 implementations/svg/render.py \
   --output Palembang.svg
 ```
 
-It reconstructs each target rectangle from the canonical tokens instead of stretching a bitmap.
+It reconstructs each target rectangle from the canonical tokens instead of stretching a bitmap. The renderer's source code is MIT-licensed; the SVG it generates is a usable output under CC BY 4.0 (see [Use Palembang](#use-palembang) above).
 
 ## Canonical assets
 
@@ -106,7 +122,7 @@ implementations/        platform renderers (placeholders for now)
 
 ## Rights & stewardship
 
-Source code in this repository is MIT-licensed. The artwork, photographs, Figma source, and canonical graphic assets are **not** — public visibility here is not permission to reuse them. See [`LICENSE.md`](LICENSE.md) and [`ARTWORK-RIGHTS.md`](ARTWORK-RIGHTS.md) for the full licensing structure and the maintainer's stewardship commitment toward the original artist.
+This repository uses three licenses: source code is MIT-licensed; the reusable visual system and official-renderer output are CC BY 4.0-licensed (see [Use Palembang](#use-palembang)); the original artwork, photographs, Figma source, and canonical graphic assets are all rights reserved — public visibility here is not permission to reuse them. See [`VISUAL-LICENSE.md`](VISUAL-LICENSE.md), [`LICENSE.md`](LICENSE.md), and [`ARTWORK-RIGHTS.md`](ARTWORK-RIGHTS.md) for the full licensing structure and the maintainer's stewardship commitment toward the original artist.
 
 ## Status
 

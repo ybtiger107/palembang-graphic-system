@@ -63,6 +63,16 @@ Do not claim that stored Figma 2×3 gradient matrices can be copied directly int
 
 New palettes, texture treatments, expressive variants, or experimental geometry must not overwrite the canonical source, canonical PNGs, or v1 tokens. Put experiments in a new named theme/variant/version and state which invariants are intentionally relaxed.
 
+## Licensing
+
+Palembang uses three licenses; see [`LICENSE.md`](LICENSE.md) and [`VISUAL-LICENSE.md`](VISUAL-LICENSE.md) for authoritative scope.
+
+- Never silently relicense protected canonical/original assets (`reference/`, `source/Palembang.fig`, `source/extracted/`, `assets/canonical/`, the original painting). They stay all rights reserved unless the user explicitly changes that.
+- Generated variants and official-renderer/Playground outputs follow `VISUAL-LICENSE.md` (CC BY 4.0), not the protected-materials terms — do not treat a generated SVG/PNG output as automatically all-rights-reserved just because it derives from protected canonical inputs, and do not treat it as free of attribution either.
+- Code licensing (MIT) and visual-output licensing (CC BY 4.0) are separate; do not conflate them when describing a file's license.
+- Where practical, new generated outputs (e.g. release assets) should carry or link to the appropriate license metadata (e.g. a short license notice file) rather than shipping with no license information.
+- Do not change the public license terms in `LICENSE.md`, `VISUAL-LICENSE.md`, or `ARTWORK-RIGHTS.md` without explicit user authorization.
+
 ## Git behavior
 
 Keep commits focused and use concise English commit messages. Local commits are allowed when work is complete and verified. Do not push, publish, create releases, or change the public license without explicit user authorization for that action and destination.

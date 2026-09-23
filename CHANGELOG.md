@@ -17,6 +17,7 @@ Canonical Palembang system plus first verified SVG reference renderer.
 - Narrowed `AGENTS.md` and `CLAUDE.md` to project-specific supplements and explicitly protected user/global instruction files from modification.
 - Updated repository docs, validation rules, and integrity manifest accordingly.
 - The canonical v0.1.0 source assets remain unchanged.
+- Defined the public-use licensing model: MIT for software, CC BY 4.0 for the reusable visual system and official-renderer output, all rights reserved for canonical/original materials. Added `VISUAL-LICENSE.md`, updated `LICENSE.md` and `ARTWORK-RIGHTS.md`, and added a license notice to the SVG renderer release archive.
 
 ## 0.1.0 — 2026-09-23
 
