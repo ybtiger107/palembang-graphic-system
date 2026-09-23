@@ -19,9 +19,6 @@ For a one-off invocation:
 npx @palembang/cli render --size 1920x1080 > palembang.svg
 ```
 
-The package is prepared as version `0.6.0` and is not published by this
-implementation pass.
-
 ## Usage
 
 Render with the convenience size syntax:

@@ -1,10 +1,12 @@
 # Changelog
 
-## Unreleased — planned v0.6.0
+## 0.6.0 — 2026-09-24
 
-CLI & Automation: planned official `@palembang/cli` package for deterministic
-SVG rendering from terminals, servers, shell scripts, and CI through
-`@palembang/core`.
+CLI & Automation: released the official `@palembang/cli` package with
+`palembang render` for exact-dimension SVG output to stdout or files, six-token
+palette overrides, preserved attribution metadata, and deterministic terminal,
+SSH, shell-script, and CI use through `@palembang/core` rather than a
+duplicated renderer.
 
 ## 0.5.0 — 2026-09-23
 

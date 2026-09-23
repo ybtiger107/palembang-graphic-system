@@ -111,6 +111,15 @@ npm install @palembang/core
 import { renderPalembangSvg } from "@palembang/core";
 ```
 
+The public npm packages are [`@palembang/core`](packages/core/) for JavaScript
+rendering and [`@palembang/cli`](packages/cli/) for terminal and automation
+workflows:
+
+```sh
+npm install -g @palembang/cli
+palembang render --size 1920x1080 -o palembang.svg
+```
+
 ## Canonical assets
 
 If you just need the official Palembang graphic, use these directly rather than recreating them:
@@ -171,12 +180,8 @@ This repository uses three licenses: source code is MIT-licensed; the reusable v
 
 ## Status
 
-**v0.5.0 — Palembang Developer SDK.**
+**v0.6.0 — CLI & Automation.**
 
-Palembang can now be rendered directly from JavaScript using the dependency-free `@palembang/core` package, alongside the existing browser Playground and shareable design workflows.
-
-**v0.6.0 — CLI & Automation (planned).**
-
-The official `@palembang/cli` package is being prepared for deterministic SVG
-rendering from terminals, servers, shell scripts, and CI through
-`@palembang/core`. The current stable release remains v0.5.0.
+Palembang can be rendered from JavaScript with `@palembang/core` or from
+terminals, servers, shell scripts, and CI with `@palembang/cli`, alongside the
+existing browser Playground and shareable design workflows.

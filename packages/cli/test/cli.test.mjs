@@ -105,6 +105,6 @@ test("the package has only the core runtime dependency", () => {
   const packageJson = JSON.parse(readFileSync(join(PACKAGE_DIR, "package.json"), "utf8"));
   assert.deepEqual(Object.keys(packageJson.dependencies), ["@palembang/core"]);
   assert.equal(packageJson.bin.palembang, "./src/cli.js");
-  assert.equal(packageJson.private, true);
+  assert.equal("private" in packageJson, false);
   assert.equal(packageJson.engines.node, ">=20");
 });
