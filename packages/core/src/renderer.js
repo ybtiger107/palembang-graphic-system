@@ -1,3 +1,6 @@
+// GENERATED FILE. Do not edit by hand.
+// Source: implementations/web/palembang.js
+
 /**
  * Palembang browser renderer.
  *
@@ -15,7 +18,6 @@
 
 const SCENE_TOKENS = ["sky.hot", "sky.cool", "sea.light", "sea.dark", "sea.haze", "sea.glow"];
 
-const CANDIDATE_TOKEN_URLS = ["./tokens/palembang.v1.json", "../../tokens/palembang.v1.json"];
 
 /**
  * Format a number for SVG output. JS's `Number.prototype.toString()` already
@@ -195,34 +197,4 @@ export function renderSvg(tokens, width, height, options = {}) {
     `fill="url(#sea-glow)" opacity="${glowOpacity}"/>\n` +
     "</svg>\n"
   );
-}
-
-/**
- * Resolve the token URLs to try, in order, relative to a document/module base
- * URL. Kept as a pure function (no fetch) so the resolution logic is
- * testable under Node without a network stack. See README "Token loading on
- * GitHub Pages" for why there are two candidates.
- */
-export function tokenCandidateUrls(baseUrl) {
-  return CANDIDATE_TOKEN_URLS.map((path) => new URL(path, baseUrl).href);
-}
-
-/**
- * Fetch tokens/palembang.v1.json, trying the deployed co-located copy first
- * and falling back to the canonical repository-relative path for local dev.
- * Throws if neither candidate is reachable.
- */
-export async function loadTokens(baseUrl, fetchImpl = fetch) {
-  const candidates = tokenCandidateUrls(baseUrl);
-  let lastError;
-  for (const url of candidates) {
-    try {
-      const response = await fetchImpl(url);
-      if (response.ok) return await response.json();
-      lastError = new Error(`${url} responded ${response.status}`);
-    } catch (error) {
-      lastError = error;
-    }
-  }
-  throw new Error(`could not load Palembang tokens from any candidate URL: ${candidates.join(", ")}\n${lastError}`);
 }

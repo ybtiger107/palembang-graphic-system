@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased — planned v0.5.0
+
+Developer SDK: the first reusable Palembang JavaScript Core SDK is being
+developed under `packages/core/`. This is not a release; the public package
+name and registry identity remain undecided.
+
 ## 0.4.0 — 2026-09-23
 
 Shareable Palembang: designs can now be saved, shared, reopened, and remixed directly in the browser — still a fully static, backend-free app (no accounts, no cloud sync, no server, no analytics).

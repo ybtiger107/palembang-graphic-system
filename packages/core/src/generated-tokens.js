@@ -1,0 +1,256 @@
+// GENERATED FILE. Do not edit by hand.
+// Source: tokens/palembang.v1.json
+
+const data = {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Palembang Graphic System",
+  "specVersion": "1.0",
+  "colorSpace": "sRGB",
+  "authority": {
+    "implementationSource": "source/Palembang.fig",
+    "humanSpecification": "docs/specification.md",
+    "artisticReferenceDirectory": "reference/"
+  },
+  "geometry": {
+    "horizonY": 0.5,
+    "upperHeight": 0.5,
+    "lowerHeight": 0.5,
+    "adaptation": "rebuild-halves-with-normalized-paint-transforms"
+  },
+  "palette": {
+    "sky.hot": "#DF8117",
+    "sky.cool": "#8198C4",
+    "sea.light": "#8BA08A",
+    "sea.dark": "#516872",
+    "sea.haze": "#C0C0C0",
+    "sea.glow": "#78B6BA",
+    "surround.dark": "#0B1014",
+    "boolean.input.gray": "#D9D9D9",
+    "utility.hidden.purple": "#5B295D",
+    "page.background": "#FFFFFF"
+  },
+  "sky": {
+    "type": "radial",
+    "opacity": 1,
+    "blendMode": "normal",
+    "transform": [
+      [
+        -0.23465590178966522,
+        -0.4919448792934418,
+        1.135002613067627
+      ],
+      [
+        1.0074560642242432,
+        -0.11458345502614975,
+        0.00038877970655448735
+      ]
+    ],
+    "stops": [
+      {
+        "position": 0,
+        "colorToken": "sky.hot",
+        "alpha": 1
+      },
+      {
+        "position": 1,
+        "colorToken": "sky.cool",
+        "alpha": 1
+      }
+    ]
+  },
+  "sea": {
+    "base": {
+      "type": "radial",
+      "opacity": 1,
+      "blendMode": "normal",
+      "transform": [
+        [
+          -0.5384021401405334,
+          -0.29897022247314453,
+          1.2772572040557861
+        ],
+        [
+          0.29897022247314453,
+          -0.12837707996368408,
+          0.3539741635322571
+        ]
+      ],
+      "stops": [
+        {
+          "position": 0,
+          "colorToken": "sea.light",
+          "alpha": 1
+        },
+        {
+          "position": 1,
+          "colorToken": "sea.dark",
+          "alpha": 1
+        }
+      ]
+    },
+    "haze": {
+      "type": "linear",
+      "opacity": 0.44999998807907104,
+      "blendMode": "normal",
+      "transform": [
+        [
+          -3.0531133177191805e-16,
+          -0.4260985553264618,
+          0.5246338248252869
+        ],
+        [
+          0.4260985553264618,
+          -2.7755575615628914e-17,
+          0.3342210352420807
+        ]
+      ],
+      "stops": [
+        {
+          "position": 0.20000000298023224,
+          "colorToken": "sea.haze",
+          "alpha": 0
+        },
+        {
+          "position": 0.30000001192092896,
+          "colorToken": "sea.haze",
+          "alpha": 0.800000011920929
+        },
+        {
+          "position": 0.3764832615852356,
+          "colorToken": "sea.haze",
+          "alpha": 0
+        }
+      ],
+      "small320SourceOverride": {
+        "middleStopAlpha": 1
+      }
+    },
+    "glow": {
+      "type": "radial",
+      "opacity": 0.6000000238418579,
+      "blendMode": "normal",
+      "transform": [
+        [
+          0.770240843296051,
+          -0.6885483860969543,
+          0.9014222025871277
+        ],
+        [
+          0.6885483860969543,
+          0.19256021082401276,
+          0.13915027678012848
+        ]
+      ],
+      "stops": [
+        {
+          "position": 0.09071040898561478,
+          "colorToken": "sea.glow",
+          "alpha": 1
+        },
+        {
+          "position": 1,
+          "colorToken": "sea.glow",
+          "alpha": 0
+        }
+      ]
+    }
+  },
+  "texture": {
+    "canonicalIntensity": 0,
+    "minimum": 0,
+    "maximum": 1
+  },
+  "sourceVariants": {
+    "smallSquare": {
+      "width": 320,
+      "height": 320,
+      "horizonY": 160
+    },
+    "wide": {
+      "width": 2560,
+      "height": 1080,
+      "horizonY": 540
+    },
+    "medium": {
+      "width": 2560,
+      "height": 1664,
+      "horizonY": 832
+    },
+    "square": {
+      "width": 2560,
+      "height": 2560,
+      "horizonY": 1280
+    }
+  },
+  "circularPreview": {
+    "booleanOperation": "XOR",
+    "surround": {
+      "positionOnPage": {
+        "x": 0,
+        "y": -52
+      },
+      "width": 438,
+      "height": 423,
+      "fillToken": "surround.dark",
+      "locked": true
+    },
+    "circle": {
+      "relativePosition": {
+        "x": 59,
+        "y": 51
+      },
+      "absolutePagePosition": {
+        "x": 59,
+        "y": -1
+      },
+      "width": 320,
+      "height": 320
+    },
+    "graphic": {
+      "absolutePagePosition": {
+        "x": 59,
+        "y": -1
+      },
+      "width": 320,
+      "height": 320
+    }
+  },
+  "sourceUtilityLayer": {
+    "name": "Rectangle 3",
+    "visible": false,
+    "locked": true,
+    "position": {
+      "x": -281,
+      "y": -288
+    },
+    "width": 1000,
+    "height": 1000,
+    "fillToken": "utility.hidden.purple"
+  },
+  "sourceMetadata": {
+    "fileName": "Palembang",
+    "documentColorProfile": "SRGB",
+    "pageBackground": "#FFFFFF",
+    "exportedAt": "2026-09-18T14:29:15.668Z",
+    "embeddedRasterImageCount": 0
+  },
+  "sourceExport": {
+    "imageType": "PNG",
+    "constraintType": "CONTENT_SCALE",
+    "constraintValue": 1,
+    "contentsOnly": true,
+    "useAbsoluteBounds": false,
+    "colorProfile": "DOCUMENT",
+    "useBicubicSampler": true
+  }
+};
+
+function deepFreeze(value) {
+  if (value && typeof value === "object" && !Object.isFrozen(value)) {
+    Object.freeze(value);
+    for (const child of Object.values(value)) deepFreeze(child);
+  }
+  return value;
+}
+
+export const canonicalTokens = deepFreeze(data);

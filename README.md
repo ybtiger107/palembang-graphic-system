@@ -136,6 +136,7 @@ Implementation status:
 |---|---|
 | [SVG reference renderer](implementations/svg/README.md) | implemented and verified |
 | [Web Playground](implementations/web/README.md) | implemented and deployed |
+| JavaScript Core SDK (`packages/core/`) | in development for planned v0.5.0 |
 | Canvas / SwiftUI | future work |
 
 ## Repository map

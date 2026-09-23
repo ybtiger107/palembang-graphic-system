@@ -1,0 +1,10 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Palembang Core SDK browser example</title>
+<div id="preview"></div>
+<script type="module">
+  import { renderPalembangSvg } from "../src/index.js";
+
+  const svg = renderPalembangSvg({ width: 1920, height: 1080 });
+  document.querySelector("#preview").innerHTML = svg;
+</script>
