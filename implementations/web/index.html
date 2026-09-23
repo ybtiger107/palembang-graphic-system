@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Palembang Playground</title>
-<meta name="description" content="Explore and export the Palembang Graphic System: recolor the canonical palette, choose a format, and download SVG/PNG under CC BY 4.0.">
+<meta name="description" content="Explore and export the Palembang Graphic System: choose a format or wallpaper size, recolor the canonical palette, and download SVG/PNG under CC BY 4.0.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -28,26 +28,43 @@
     <form id="controls">
 
       <section class="control-group">
-        <h2 id="controls-heading">Palette</h2>
-        <p class="control-hint">Six scene colors. Geometry, gradients, and layer order stay fixed.</p>
-        <div id="paletteGrid" class="palette-grid"></div>
-        <button type="button" id="resetPalette" class="ghost-button">Reset palette to original</button>
+        <h2 id="controls-heading">Format</h2>
+
+        <div class="mode-toggle" id="modeToggle">
+          <input type="radio" name="mode" id="mode-standard" value="standard" checked>
+          <label for="mode-standard">Standard</label>
+          <input type="radio" name="mode" id="mode-wallpaper" value="wallpaper">
+          <label for="mode-wallpaper">Wallpaper</label>
+        </div>
+
+        <div id="standardControls" class="format-mode-panel">
+          <div id="presetRow" class="preset-row" role="radiogroup" aria-label="Standard format preset"></div>
+
+          <div class="dimension-row">
+            <label>
+              <span>Width</span>
+              <input type="number" id="widthInput" min="16" max="6000" step="1" inputmode="numeric">
+            </label>
+            <label>
+              <span>Height <span id="heightLockNote" class="lock-note">auto</span></span>
+              <input type="number" id="heightInput" min="16" max="6000" step="1" inputmode="numeric">
+            </label>
+          </div>
+          <p id="formatHint" class="control-hint"></p>
+        </div>
+
+        <div id="wallpaperControls" class="format-mode-panel" hidden>
+          <label class="wallpaper-select-label" for="wallpaperSelect">Device / display</label>
+          <select id="wallpaperSelect"></select>
+          <p class="control-hint">Wallpaper presets set an exact device resolution; width and height aren't editable in this mode.</p>
+        </div>
       </section>
 
       <section class="control-group">
-        <h2>Format</h2>
-        <div id="presetRow" class="preset-row"></div>
-        <div class="dimension-row">
-          <label>
-            <span>Width</span>
-            <input type="number" id="widthInput" min="16" max="6000" step="1" inputmode="numeric">
-          </label>
-          <label>
-            <span>Height</span>
-            <input type="number" id="heightInput" min="16" max="6000" step="1" inputmode="numeric">
-          </label>
-        </div>
-        <p class="control-hint">Custom width/height reconstructs both halves at the new ratio — nothing is cropped or stretched.</p>
+        <h2>Palette</h2>
+        <p class="control-hint">Six scene colors. Geometry, gradients, and layer order stay fixed.</p>
+        <div id="paletteGrid" class="palette-grid"></div>
+        <button type="button" id="resetPalette" class="ghost-button">Reset palette to original</button>
       </section>
 
       <section class="control-group">
@@ -59,7 +76,8 @@
         <p id="exportStatus" class="control-hint" aria-live="polite"></p>
       </section>
 
-      <button type="button" id="canonicalReset" class="reset-button">Restore canonical Palembang</button>
+      <button type="button" id="canonicalReset" class="reset-button">Reset everything to canonical Palembang</button>
+      <p class="control-hint">Also clears your saved Playground settings on this device.</p>
     </form>
   </aside>
 </main>
@@ -78,7 +96,7 @@ CC BY 4.0</pre>
     <a class="ghost-link" href="https://github.com/ybtiger107/palembang-graphic-system/blob/main/VISUAL-LICENSE.md" target="_blank" rel="noopener">Licensing details</a>
     <span id="copyStatus" class="copy-status" aria-live="polite"></span>
   </div>
-  <p class="disclaimer">This is an unofficial playground for the Palembang Graphic System. Attribution does not imply endorsement of your project.</p>
+  <p class="disclaimer">This is an unofficial playground for the Palembang Graphic System. Attribution does not imply endorsement of your project. Format, palette, and mode choices are saved in this browser only (localStorage) — nothing is sent to a server.</p>
 </footer>
 
 <script type="module" src="app.js"></script>

@@ -1,11 +1,20 @@
-import { renderSvg, mergePalette, scenePaletteTokens, loadTokens } from "./palembang.js";
-
-const PRESETS = [
-  { id: "square", label: "Square", ratio: "1:1", width: 2560, height: 2560 },
-  { id: "medium", label: "Medium", ratio: "20:13", width: 2560, height: 1664 },
-  { id: "wide", label: "Wide", ratio: "64:27", width: 2560, height: 1080 },
-];
-const CANONICAL_PRESET_ID = "wide";
+import { renderSvg, scenePaletteTokens, loadTokens } from "./palembang.js";
+import {
+  STANDARD_PRESETS,
+  CUSTOM_PRESET_ID,
+  CANONICAL_STANDARD_PRESET_ID,
+  WALLPAPER_GROUPS,
+  standardPresetById,
+  createDefaultState,
+  computeEffectiveDimensions,
+  switchToCustomPreset,
+  serializeState,
+  restoreState,
+  ratioLabel,
+  normalizeHex,
+  clampDimension,
+  STORAGE_KEY,
+} from "./playground-state.js";
 
 const ROLE_LABELS = {
   "sky.hot": "Sky — hot",
@@ -16,17 +25,10 @@ const ROLE_LABELS = {
   "sea.glow": "Sea — glow",
 };
 
-const HEX_RE = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
-const MIN_DIMENSION = 16;
-const MAX_DIMENSION = 6000;
-
-const state = {
-  tokens: null,
-  canonicalPalette: null,
-  palette: {},
-  width: PRESETS.find((p) => p.id === CANONICAL_PRESET_ID).width,
-  height: PRESETS.find((p) => p.id === CANONICAL_PRESET_ID).height,
-};
+let tokens = null;
+let canonicalPalette = null;
+/** @type {import("./playground-state.js").PlaygroundState} */
+let state = null;
 
 const els = {
   preview: document.getElementById("preview"),
@@ -35,8 +37,15 @@ const els = {
   paletteGrid: document.getElementById("paletteGrid"),
   resetPalette: document.getElementById("resetPalette"),
   presetRow: document.getElementById("presetRow"),
+  modeStandard: document.getElementById("mode-standard"),
+  modeWallpaper: document.getElementById("mode-wallpaper"),
+  standardControls: document.getElementById("standardControls"),
+  wallpaperControls: document.getElementById("wallpaperControls"),
+  wallpaperSelect: document.getElementById("wallpaperSelect"),
   widthInput: document.getElementById("widthInput"),
   heightInput: document.getElementById("heightInput"),
+  heightLockNote: document.getElementById("heightLockNote"),
+  formatHint: document.getElementById("formatHint"),
   exportSvg: document.getElementById("exportSvg"),
   exportPng: document.getElementById("exportPng"),
   exportStatus: document.getElementById("exportStatus"),
@@ -45,34 +54,33 @@ const els = {
   copyStatus: document.getElementById("copyStatus"),
 };
 
-function normalizeHex(value) {
-  const trimmed = value.trim();
-  if (!HEX_RE.test(trimmed)) return null;
-  if (trimmed.length === 4) {
-    const [, r, g, b] = trimmed;
-    return `#${r}${r}${g}${g}${b}${b}`.toLowerCase();
+function loadPersistedState() {
+  let raw = null;
+  try {
+    raw = localStorage.getItem(STORAGE_KEY);
+  } catch {
+    // Storage unavailable (private browsing / disabled) — start from canonical defaults.
   }
-  return trimmed.toLowerCase();
+  return restoreState(raw, canonicalPalette);
 }
 
-function clampDimension(value) {
-  const rounded = Math.round(value);
-  if (!Number.isFinite(rounded)) return MIN_DIMENSION;
-  return Math.min(MAX_DIMENSION, Math.max(MIN_DIMENSION, rounded));
+function persistState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(serializeState(state, canonicalPalette)));
+  } catch {
+    // Storage unavailable — runtime state still works, it just won't survive a reload.
+  }
 }
 
-function currentGcd(a, b) {
-  return b === 0 ? a : currentGcd(b, a % b);
+function currentOverrides() {
+  const overrides = {};
+  for (const token of scenePaletteTokens()) {
+    if (state.palette[token] !== canonicalPalette[token]) overrides[token] = state.palette[token];
+  }
+  return overrides;
 }
 
-function ratioLabel(width, height) {
-  const g = currentGcd(Math.round(width), Math.round(height)) || 1;
-  return `${Math.round(width) / g}:${Math.round(height) / g}`;
-}
-
-function matchingPreset(width, height) {
-  return PRESETS.find((p) => p.width === width && p.height === height)?.id ?? null;
-}
+// --- Palette editor --------------------------------------------------
 
 function buildPaletteGrid() {
   els.paletteGrid.innerHTML = "";
@@ -106,6 +114,7 @@ function buildPaletteGrid() {
       colorInput.value = hex;
       hexInput.value = hex;
       renderPreview();
+      persistState();
     };
 
     colorInput.addEventListener("input", () => applyColor(colorInput.value));
@@ -120,7 +129,7 @@ function buildPaletteGrid() {
 
     const original = document.createElement("p");
     original.className = "palette-row-original";
-    original.textContent = `original ${state.canonicalPalette[token]}`;
+    original.textContent = `original ${canonicalPalette[token]}`;
 
     controls.append(colorInput, hexInput);
     row.append(label, controls, original);
@@ -138,63 +147,168 @@ function syncPaletteInputs() {
   }
 }
 
-function buildPresetRow() {
+// --- Format: mode toggle + standard presets + wallpaper presets ------
+
+function appendPresetChip(container, name, inputId, value, checked, onChange, [title, resolution, ratio]) {
+  const input = document.createElement("input");
+  input.type = "radio";
+  input.name = name;
+  input.id = inputId;
+  input.value = value;
+  input.checked = checked;
+  input.addEventListener("change", onChange);
+
+  const label = document.createElement("label");
+  label.setAttribute("for", inputId);
+  label.innerHTML =
+    `<span class="preset-name">${title}</span>` +
+    `<span class="preset-res">${resolution}</span>` +
+    `<span class="preset-ratio">${ratio}</span>`;
+
+  container.append(input, label);
+}
+
+function buildStandardPresetRow() {
   els.presetRow.innerHTML = "";
-  for (const preset of PRESETS) {
-    const inputId = `preset-${preset.id}`;
-    const input = document.createElement("input");
-    input.type = "radio";
-    input.name = "preset";
-    input.id = inputId;
-    input.value = preset.id;
-
-    const label = document.createElement("label");
-    label.setAttribute("for", inputId);
-    label.innerHTML = `${preset.label}<span class="ratio">${preset.ratio}</span>`;
-
-    input.addEventListener("change", () => {
-      applyDimensions(preset.width, preset.height);
-    });
-
-    els.presetRow.append(input, label);
+  for (const preset of STANDARD_PRESETS) {
+    appendPresetChip(
+      els.presetRow,
+      "standardPreset",
+      `preset-${preset.id}`,
+      preset.id,
+      state.standardPresetId === preset.id,
+      () => {
+        state.standardPresetId = preset.id;
+        state.standardWidth = preset.width;
+        applyEffective();
+      },
+      [preset.label, `${preset.width} × ${preset.height}`, preset.ratio]
+    );
   }
-  syncPresetSelection();
+  appendPresetChip(
+    els.presetRow,
+    "standardPreset",
+    "preset-custom",
+    CUSTOM_PRESET_ID,
+    state.standardPresetId === CUSTOM_PRESET_ID,
+    () => {
+      state = switchToCustomPreset(state);
+      applyEffective();
+    },
+    ["Custom", "Any size", "your ratio"]
+  );
 }
 
-function syncPresetSelection() {
-  const matched = matchingPreset(state.width, state.height);
-  for (const preset of PRESETS) {
-    const input = document.getElementById(`preset-${preset.id}`);
-    if (input) input.checked = preset.id === matched;
+function syncStandardPresetSelection() {
+  for (const id of [...STANDARD_PRESETS.map((p) => p.id), CUSTOM_PRESET_ID]) {
+    const input = document.getElementById(`preset-${id}`);
+    if (input) input.checked = id === state.standardPresetId;
   }
 }
 
-function applyDimensions(width, height) {
-  state.width = clampDimension(width);
-  state.height = clampDimension(height);
-  els.widthInput.value = state.width;
+function buildWallpaperSelect() {
+  els.wallpaperSelect.innerHTML = "";
+  for (const group of WALLPAPER_GROUPS) {
+    const optgroup = document.createElement("optgroup");
+    optgroup.label = group.label;
+    for (const preset of group.presets) {
+      const option = document.createElement("option");
+      option.value = preset.id;
+      option.textContent = `${preset.label} — ${preset.width} × ${preset.height}`;
+      optgroup.append(option);
+    }
+    els.wallpaperSelect.append(optgroup);
+  }
+  els.wallpaperSelect.addEventListener("change", () => {
+    state.wallpaperPresetId = els.wallpaperSelect.value;
+    applyEffective();
+  });
+}
+
+function updateFormatControlsUI() {
+  const isWallpaper = state.mode === "wallpaper";
+  els.modeStandard.checked = !isWallpaper;
+  els.modeWallpaper.checked = isWallpaper;
+  els.standardControls.hidden = isWallpaper;
+  els.wallpaperControls.hidden = !isWallpaper;
+
+  syncStandardPresetSelection();
+  els.wallpaperSelect.value = state.wallpaperPresetId;
+
+  const isCustom = state.standardPresetId === CUSTOM_PRESET_ID;
+  els.widthInput.value = isCustom ? state.customWidth : state.standardWidth;
   els.heightInput.value = state.height;
-  syncPresetSelection();
-  renderPreview();
+  els.heightInput.readOnly = !isCustom;
+  els.heightInput.setAttribute("aria-readonly", String(!isCustom));
+  els.heightLockNote.hidden = isCustom;
+  els.heightInput.classList.toggle("is-locked", !isCustom);
+
+  if (isCustom) {
+    els.formatHint.textContent = "Width and height are independent here — nothing is cropped or stretched.";
+  } else {
+    const preset = standardPresetById(state.standardPresetId) ?? standardPresetById(CANONICAL_STANDARD_PRESET_ID);
+    els.formatHint.textContent = `Height follows the ${preset.label} ratio (${preset.ratio}) automatically as you change width. Choose Custom to set both directly.`;
+  }
 }
+
+function applyEffective() {
+  const effective = computeEffectiveDimensions(state);
+  state.width = effective.width;
+  state.height = effective.height;
+  updateFormatControlsUI();
+  renderPreview();
+  persistState();
+}
+
+function wireModeToggle() {
+  els.modeStandard.addEventListener("change", () => {
+    if (els.modeStandard.checked) {
+      state.mode = "standard";
+      applyEffective();
+    }
+  });
+  els.modeWallpaper.addEventListener("change", () => {
+    if (els.modeWallpaper.checked) {
+      state.mode = "wallpaper";
+      applyEffective();
+    }
+  });
+}
+
+function wireDimensionInputs() {
+  els.widthInput.addEventListener("change", () => {
+    const value = clampDimension(Number(els.widthInput.value));
+    if (state.standardPresetId === CUSTOM_PRESET_ID) {
+      state.customWidth = value;
+    } else {
+      state.standardWidth = value;
+    }
+    applyEffective();
+  });
+  els.heightInput.addEventListener("change", () => {
+    if (state.standardPresetId !== CUSTOM_PRESET_ID) {
+      // Read-only in every non-Custom standard preset; re-assert the derived value.
+      updateFormatControlsUI();
+      return;
+    }
+    state.customHeight = clampDimension(Number(els.heightInput.value));
+    applyEffective();
+  });
+}
+
+// --- Preview -----------------------------------------------------------
 
 function renderPreview() {
-  const overrides = {};
-  for (const token of scenePaletteTokens()) {
-    if (state.palette[token] !== state.canonicalPalette[token]) overrides[token] = state.palette[token];
-  }
-  const svg = renderSvg(state.tokens, state.width, state.height, { palette: overrides });
+  const svg = renderSvg(tokens, state.width, state.height, { palette: currentOverrides() });
   els.preview.innerHTML = svg;
   els.previewFrame.style.aspectRatio = `${state.width} / ${state.height}`;
   els.previewCaption.textContent = `${state.width} × ${state.height} · ${ratioLabel(state.width, state.height)}`;
 }
 
+// --- Export --------------------------------------------------------------
+
 function buildExportSvg() {
-  const overrides = {};
-  for (const token of scenePaletteTokens()) {
-    if (state.palette[token] !== state.canonicalPalette[token]) overrides[token] = state.palette[token];
-  }
-  return renderSvg(state.tokens, state.width, state.height, { palette: overrides, attribution: true });
+  return renderSvg(tokens, state.width, state.height, { palette: currentOverrides(), attribution: true });
 }
 
 function downloadBlob(blob, filename) {
@@ -242,17 +356,28 @@ function exportPngFile() {
   image.src = url;
 }
 
+// --- Reset actions ---------------------------------------------------
+
 function resetPaletteOnly() {
-  state.palette = { ...state.canonicalPalette };
+  state.palette = { ...canonicalPalette };
   syncPaletteInputs();
   renderPreview();
+  persistState();
 }
 
-function canonicalReset() {
-  state.palette = { ...state.canonicalPalette };
+function fullReset() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // Storage unavailable — nothing to clear.
+  }
+  // A brand-new state object works with the already-bound listeners below:
+  // they close over the `state` binding itself, not a snapshot, and
+  // applyEffective() -> updateFormatControlsUI() re-syncs every control
+  // (including preset .checked state) from this new object.
+  state = createDefaultState(canonicalPalette);
   syncPaletteInputs();
-  const canonical = PRESETS.find((p) => p.id === CANONICAL_PRESET_ID);
-  applyDimensions(canonical.width, canonical.height);
+  applyEffective();
 }
 
 async function copyAttribution() {
@@ -268,14 +393,11 @@ async function copyAttribution() {
   }, 2500);
 }
 
-function wireDimensionInputs() {
-  els.widthInput.addEventListener("change", () => applyDimensions(Number(els.widthInput.value), state.height));
-  els.heightInput.addEventListener("change", () => applyDimensions(state.width, Number(els.heightInput.value)));
-}
+// --- Boot ----------------------------------------------------------------
 
 async function init() {
   try {
-    state.tokens = await loadTokens(import.meta.url);
+    tokens = await loadTokens(import.meta.url);
   } catch (error) {
     els.preview.innerHTML = "";
     els.previewCaption.textContent = "Could not load Palembang tokens. See console for details.";
@@ -283,22 +405,22 @@ async function init() {
     return;
   }
 
-  state.canonicalPalette = { ...state.tokens.palette };
-  state.palette = { ...state.canonicalPalette };
+  canonicalPalette = { ...tokens.palette };
+  state = loadPersistedState();
 
   buildPaletteGrid();
-  buildPresetRow();
-  els.widthInput.value = state.width;
-  els.heightInput.value = state.height;
+  buildStandardPresetRow();
+  buildWallpaperSelect();
+  wireModeToggle();
   wireDimensionInputs();
 
   els.resetPalette.addEventListener("click", resetPaletteOnly);
-  els.canonicalReset.addEventListener("click", canonicalReset);
+  els.canonicalReset.addEventListener("click", fullReset);
   els.exportSvg.addEventListener("click", exportSvgFile);
   els.exportPng.addEventListener("click", exportPngFile);
   els.copyAttribution.addEventListener("click", copyAttribution);
 
-  renderPreview();
+  applyEffective();
 }
 
 init();

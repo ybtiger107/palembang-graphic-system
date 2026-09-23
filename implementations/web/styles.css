@@ -238,6 +238,59 @@ input:focus-visible {
   font-family: ui-monospace, monospace;
 }
 
+.mode-toggle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  padding: 0.25rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  max-width: 100%;
+}
+.mode-toggle input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.mode-toggle label {
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.mode-toggle input[type="radio"]:checked + label {
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+.mode-toggle input[type="radio"]:focus-visible + label {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.format-mode-panel {
+  margin-top: 1rem;
+  min-width: 0;
+}
+
+.wallpaper-select-label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+#wallpaperSelect {
+  width: 100%;
+  min-width: 0;
+  font-size: 0.92rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-raised);
+  color: var(--text);
+}
+
 .preset-row {
   margin-top: 0.75rem;
   display: flex;
@@ -254,22 +307,33 @@ input:focus-visible {
   flex-direction: column;
   align-items: center;
   gap: 0.1rem;
-  padding: 0.5rem 0.9rem;
+  padding: 0.45rem 0.85rem;
   border: 1px solid var(--border-strong);
-  border-radius: 999px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 0.85rem;
   color: var(--text-muted);
-  line-height: 1.2;
+  line-height: 1.25;
+  text-align: center;
 }
-.preset-row label span.ratio {
+.preset-row label .preset-name {
+  font-weight: 600;
+  color: var(--text);
+}
+.preset-row label .preset-res {
+  font-size: 0.76rem;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+.preset-row label .preset-ratio {
   font-size: 0.7rem;
-  opacity: 0.8;
+  opacity: 0.75;
 }
 .preset-row input[type="radio"]:checked + label {
   border-color: var(--accent);
-  color: var(--text);
   background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+.preset-row input[type="radio"]:checked + label .preset-name {
+  color: var(--text);
 }
 .preset-row input[type="radio"]:focus-visible + label {
   outline: 2px solid var(--focus);
@@ -280,6 +344,12 @@ input:focus-visible {
   margin-top: 0.9rem;
   display: flex;
   gap: 0.75rem;
+}
+.lock-note {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
 }
 .dimension-row label {
   flex: 1;
@@ -299,6 +369,12 @@ input:focus-visible {
   border: 1px solid var(--border-strong);
   background: var(--bg-raised);
   color: var(--text);
+}
+.dimension-row input.is-locked {
+  color: var(--text-muted);
+  background: transparent;
+  border-style: dashed;
+  cursor: default;
 }
 
 .export-row {

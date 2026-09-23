@@ -72,6 +72,25 @@ describe("no fixed-width overflow traps in shrinkable containers", () => {
   });
 });
 
+describe("new Format-mode controls don't reintroduce overflow", () => {
+  test(".mode-toggle wraps instead of forcing width beyond its container", () => {
+    const body = ruleBody(CSS, /\.mode-toggle\s*\{/);
+    assert.match(body, /flex-wrap:\s*wrap/);
+    assert.match(body, /max-width:\s*100%/);
+  });
+
+  test("#wallpaperSelect can shrink to its container", () => {
+    const body = ruleBody(CSS, /#wallpaperSelect\s*\{/);
+    assert.match(body, /width:\s*100%/);
+    assert.match(body, /min-width:\s*0/);
+  });
+
+  test(".preset-row still wraps (now holds 4 multi-line chips, not 3 single-line ones)", () => {
+    const body = ruleBody(CSS, /\.preset-row\s*\{/);
+    assert.match(body, /flex-wrap:\s*wrap/);
+  });
+});
+
 describe("preview frame tracks the selected aspect ratio (no letterboxing)", () => {
   test(".preview-svg has no hard-coded aspect-ratio of its own", () => {
     const body = ruleBody(CSS, /\.preview-svg\s*\{/);
