@@ -61,6 +61,11 @@ npm install @palembang/core
 import { renderPalembangSvg } from "@palembang/core";
 ```
 
+**Building a Swift app?**
+Add [`PalembangKit`](packages/swift/README.md), the public SwiftPM SDK for
+canonical SVG/data rendering. SwiftUI and native Apple rendering are future
+adapter layers, not part of PalembangKit.
+
 Both packages render from the same canonical tokens as every other implementation — see [Using Palembang](#using-palembang) below for how they relate to each other and to the reference renderer.
 
 ## Canonical system
@@ -168,7 +173,7 @@ Implementation and package status:
 | [Web Playground](implementations/web/README.md) | implemented and deployed |
 | [`@palembang/core`](packages/core/README.md) — JavaScript SDK | public on npm |
 | [`@palembang/cli`](packages/cli/README.md) — CLI & automation | public on npm |
-| [PalembangKit](packages/swift/README.md) — Swift SDK | planned v0.7.0, under development |
+| [PalembangKit](packages/swift/README.md) — Swift SDK | public in v0.7.0 |
 | Native Canvas / SwiftUI visual implementations | future work |
 
 ## Repository map
@@ -185,7 +190,7 @@ implementations/web/      deployed browser Playground (Standard/Custom/Wallpaper
 implementations/          canvas/, swiftui/ remain placeholders for future work
 packages/core/            @palembang/core — public JavaScript rendering SDK
 packages/cli/             @palembang/cli — public terminal/automation CLI
-packages/swift/           PalembangKit — Swift SDK (planned v0.7.0, under development)
+packages/swift/           PalembangKit — public Swift SDK
 Package.swift             SwiftPM manifest for PalembangKit (repository root, per SwiftPM convention)
 ```
 
@@ -199,13 +204,11 @@ This repository uses three licenses: source code is MIT-licensed; the reusable v
 
 ## Status
 
-**Current stable release: v0.6.0 — CLI & Automation.**
+**Current stable release: v0.7.0 — PalembangKit Swift SDK Foundation.**
 
-Palembang can be rendered from JavaScript with `@palembang/core` or from
-terminals, servers, shell scripts, and CI with `@palembang/cli`, alongside the
-existing browser Playground and shareable design workflows.
+Palembang can be rendered in the browser Playground, from terminals, servers,
+shell scripts, and CI with `@palembang/cli`, from JavaScript with
+`@palembang/core`, or from Swift with `PalembangKit`.
 
-**In development: PalembangKit — planned v0.7.0.** A dependency-free Swift
-package foundation for future iPhone and macOS Palembang apps, rendering the
-same canonical SVG contract as `@palembang/core` and the Python reference
-renderer. Not yet released or tagged — see [`packages/swift/README.md`](packages/swift/README.md).
+SwiftUI and native Apple app layers remain future work on top of the verified
+PalembangKit core. See [`packages/swift/README.md`](packages/swift/README.md).

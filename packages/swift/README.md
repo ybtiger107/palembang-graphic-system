@@ -1,6 +1,8 @@
 # PalembangKit — Swift SDK
 
-**Status: planned for v0.7.0, under development. Not yet released or tagged.**
+**v0.7.0 is the first public PalembangKit release.** The SwiftPM package is
+compile-verified on macOS, its tests pass, and cross-renderer byte parity is
+verified.
 
 PalembangKit is the canonical Swift foundation for future iPhone and macOS
 Palembang apps. It renders canonical Palembang SVG from the same design data
@@ -36,8 +38,7 @@ API.
 
 ## Installation
 
-Not yet tagged. Once `v0.7.0` is released, the intended Swift Package Manager
-dependency is:
+The Swift Package Manager dependency is:
 
 ```swift
 .package(url: "https://github.com/ybtiger107/palembang-graphic-system.git", from: "0.7.0")
@@ -168,9 +169,8 @@ byte-identical to `@palembang/core`'s for every value in the canonical token
 set; see the doc comment on `SVGNumber.format` and
 `Tests/PalembangKitTests/SVGNumberTests.swift` for the specific cases this
 was checked against (including the epsilon-scale gradient-transform values
-in `docs/specification.md` section 19). This has not yet been confirmed by
-running the Swift test suite (no Swift toolchain was available in the
-environment this was developed in) — see "Toolchain availability" below.
+in `docs/specification.md` section 19). This has been confirmed by the macOS
+Swift test suite.
 
 ## Cross-renderer parity
 
@@ -191,11 +191,11 @@ global rendering state to mutate. Passing a `palette` override to one
 `renderSVG` call cannot affect `canonicalPalette` or any other call; see
 `Tests/PalembangKitTests/ImmutabilityTests.swift`.
 
-## Toolchain availability
+## Compile verification
 
-No Swift toolchain was available in the environment PalembangKit was
-developed in, so it has not yet been built or test-run by this work. Before
-release, validate on a Mac:
+The package has been compile-verified on macOS. `swift build` passed and
+`swift test` passed with 48 tests, including 10/10 Core↔Swift byte-parity
+cases. The canonical generated-token drift check also passes:
 
 ```sh
 cd ~/projects/palembang-graphic-system
@@ -203,7 +203,10 @@ swift --version
 swift package describe
 swift build
 swift test
+node scripts/generate-swift-tokens.mjs --check
 ```
+
+Linux compile support is not claimed.
 
 ## Non-goals for v0.7
 
