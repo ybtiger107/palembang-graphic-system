@@ -198,7 +198,7 @@ Package.swift             SwiftPM manifest for PalembangKit/PalembangSwiftUI (re
 
 ## Contributing
 
-New palettes, platform implementations, and packages are welcome. Start with [`CONTRIBUTING.md`](CONTRIBUTING.md) for how canonical-value changes, new renderers, and palette-only contributions are reviewed, and [`docs/implementation-guide.md`](docs/implementation-guide.md) for how to build a new platform implementation from the canonical tokens. See [`CHANGELOG.md`](CHANGELOG.md) for release history.
+New palettes, platform implementations, and packages are welcome. Start with [`CONTRIBUTING.md`](CONTRIBUTING.md) for how canonical-value changes, new renderers, and palette-only contributions are reviewed, and [`docs/implementation-guide.md`](docs/implementation-guide.md) for how to build a new platform implementation from the canonical tokens. See [`CHANGELOG.md`](CHANGELOG.md) for release history and [`docs/roadmap.md`](docs/roadmap.md) for where the project is headed.
 
 ## Rights & stewardship
 
