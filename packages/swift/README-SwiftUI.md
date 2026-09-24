@@ -1,6 +1,14 @@
 # PalembangSwiftUI — native SwiftUI presentation layer
 
-**v0.8.0 is under development; it has not been released or tagged.**
+**Released in v0.8.0.** Add the repository as a SwiftPM dependency:
+
+```swift
+.package(
+    url: "https://github.com/ybtiger107/palembang-graphic-system.git",
+    from: "0.8.0"
+)
+```
+
 `PalembangSwiftUI` is a second Swift library product, built on top of the
 released `PalembangKit` (see [`README.md`](README.md)), that adds a native
 SwiftUI view for canonical Palembang:
@@ -33,8 +41,7 @@ iPhone / macOS applications (future work — not part of this package)
 **no WebKit, no `WKWebView`, no HTML/JavaScript, no Node, no loading the SVG
 string into a web view, no rasterizing the canonical PNG masters, no
 shipping screenshots, and no stretching/cropping a pre-rendered bitmap.** It
-is the Apple-native visual adapter PalembangKit's own README describes as
-future work.
+is the Apple-native visual layer built on PalembangKit.
 
 This package does not ship a standalone iPhone/macOS application. `Examples/SwiftUIExample.swift`
 is a copy-pasteable source file, not an Xcode project.
@@ -45,7 +52,7 @@ Same repository dependency as PalembangKit, plus the `PalembangSwiftUI`
 product:
 
 ```swift
-.package(url: "https://github.com/ybtiger107/palembang-graphic-system.git", from: "0.7.0")
+.package(url: "https://github.com/ybtiger107/palembang-graphic-system.git", from: "0.8.0")
 ```
 
 ```swift

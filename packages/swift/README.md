@@ -26,16 +26,16 @@ can render canonical Palembang without embedding a JavaScript engine or
 shelling out to Python — while still being provably the same design, not a
 reinterpretation of it (see "Renderer architecture" below).
 
-## Future iOS/macOS/SwiftUI role
+## iOS/macOS/SwiftUI role
 
 PalembangKit v0.7 is a **data and rendering core only**. It deliberately does
 not import SwiftUI, UIKit, AppKit, or WebKit, and does not ship a native
 visual renderer (Canvas, Core Graphics, Core Image, Metal, or a
 `WKWebView`/`UIImage`/`NSImage` wrapper) — see "Non-goals" below.
 
-**Update (v0.8, under development):** `PalembangSwiftUI` now exists as a
-second library product built on top of this verified core, adding a native
-SwiftUI `PalembangView`. It does not change PalembangKit's public API. See
+**Since v0.8.0:** `PalembangSwiftUI` is a second library product built on top
+of this verified core, adding a native SwiftUI `PalembangView`. It does not
+change PalembangKit's public API. See
 [`README-SwiftUI.md`](README-SwiftUI.md).
 
 ## Installation
@@ -43,7 +43,7 @@ SwiftUI `PalembangView`. It does not change PalembangKit's public API. See
 The Swift Package Manager dependency is:
 
 ```swift
-.package(url: "https://github.com/ybtiger107/palembang-graphic-system.git", from: "0.7.0")
+.package(url: "https://github.com/ybtiger107/palembang-graphic-system.git", from: "0.8.0")
 ```
 
 ```swift
@@ -221,7 +221,7 @@ PalembangKit v0.7 intentionally does **not** include:
 - an Xcode project or a full app.
 
 The goal of v0.7 is to validate the exact Swift data/renderer contract first.
-`PalembangSwiftUI` (v0.8, under development) is the native Apple visual
+`PalembangSwiftUI` (released in v0.8.0) is the native Apple visual
 adapter built on top of this verified core — see
 [`README-SwiftUI.md`](README-SwiftUI.md). PalembangKit itself still imports
 none of SwiftUI/UIKit/AppKit/WebKit; only the new `PalembangSwiftUI` target
@@ -261,9 +261,9 @@ the PalembangKit package target.
 ## Stability
 
 This API is pre-1.0 and may change before a 1.0 release. `PalembangKit`
-remains the released, stable product; `PalembangSwiftUI` (v0.8) is under
-development — see [`README-SwiftUI.md`](README-SwiftUI.md) for its own
-stability notes.
+is the Swift SVG/data core; `PalembangSwiftUI` (v0.8.0) is the released
+native Apple presentation layer. Both APIs are pre-1.0 — see
+[`README-SwiftUI.md`](README-SwiftUI.md) for its own stability notes.
 
 ## Related
 

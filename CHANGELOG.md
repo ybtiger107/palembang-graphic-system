@@ -1,13 +1,12 @@
 # Changelog
 
-## Unreleased — PalembangSwiftUI / Apple Native Presentation (v0.8.0)
+## 0.8.0 — 2026-09-24
 
-Not released or tagged. Work in progress on top of the stable 0.7.0
-PalembangKit foundation.
+PalembangSwiftUI / Apple Native Presentation:
 
 - Added a second Swift library product, `PalembangSwiftUI`, depending on
   `PalembangKit`, with a public `PalembangView` SwiftUI view.
-- Native rendering only: draws canonical Palembang directly with Core
+- Native Apple rendering only: draws canonical Palembang directly with Core
   Graphics through a thin `UIViewRepresentable`/`NSViewRepresentable`
   (`PalembangDrawingView`) — no WebKit, no HTML/JS, no rasterized PNG
   masters, no screenshots, no bitmap stretching.
@@ -36,6 +35,9 @@ PalembangKit foundation.
 - Added `packages/swift/README-SwiftUI.md`.
 - No new external runtime dependencies; platform floor unchanged
   (macOS 12+ / iOS 15+).
+- Explicit sRGB color-space handling; no WebKit, JavaScript, SVG parsing, or
+  runtime network dependency. Apple-native iOS/macOS presentation is provided
+  by the library; standalone apps remain future work.
 
 ## 0.7.0 — 2026-09-24
 
