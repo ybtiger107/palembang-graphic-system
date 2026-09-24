@@ -7,13 +7,17 @@
 // PalembangKit needs no runtime JSON loading, no network access, and no
 // filesystem dependency to render. tokens/palembang.v1.json remains the
 // authoritative source; this file must never be hand-edited.
+//
+// package access (Swift 5.9): visible to any target in this Swift package,
+// including PalembangSwiftUI, without becoming PalembangKit public API. See
+// CanonicalData.swift.
 
-enum CanonicalTokens {
-    static let horizonY: Double = 0.5
-    static let upperHeight: Double = 0.5
-    static let lowerHeight: Double = 0.5
+package enum CanonicalTokens {
+    package static let horizonY: Double = 0.5
+    package static let upperHeight: Double = 0.5
+    package static let lowerHeight: Double = 0.5
 
-    static let palette: [String: String] = [
+    package static let palette: [String: String] = [
         "sky.hot": "#DF8117",
         "sky.cool": "#8198C4",
         "sea.light": "#8BA08A",
@@ -26,7 +30,7 @@ enum CanonicalTokens {
         "page.background": "#FFFFFF",
     ]
 
-    static let sky = GradientPaint(
+    package static let sky = GradientPaint(
         kind: .radial,
         opacity: 1,
         transform: AffineTransform(
@@ -39,7 +43,7 @@ enum CanonicalTokens {
         ]
     )
 
-    static let seaBase = GradientPaint(
+    package static let seaBase = GradientPaint(
         kind: .radial,
         opacity: 1,
         transform: AffineTransform(
@@ -52,7 +56,7 @@ enum CanonicalTokens {
         ]
     )
 
-    static let seaHaze = GradientPaint(
+    package static let seaHaze = GradientPaint(
         kind: .linear,
         opacity: 0.44999998807907104,
         transform: AffineTransform(
@@ -66,9 +70,9 @@ enum CanonicalTokens {
         ]
     )
 
-    static let seaHazeSmall320MiddleStopAlpha: Double = 1
+    package static let seaHazeSmall320MiddleStopAlpha: Double = 1
 
-    static let seaGlow = GradientPaint(
+    package static let seaGlow = GradientPaint(
         kind: .radial,
         opacity: 0.6000000238418579,
         transform: AffineTransform(

@@ -15,17 +15,28 @@ let package = Package(
         .iOS(.v15),
     ],
     products: [
-        .library(name: "PalembangKit", targets: ["PalembangKit"])
+        .library(name: "PalembangKit", targets: ["PalembangKit"]),
+        .library(name: "PalembangSwiftUI", targets: ["PalembangSwiftUI"]),
     ],
     targets: [
         .target(
             name: "PalembangKit",
             path: "packages/swift/Sources/PalembangKit"
         ),
+        .target(
+            name: "PalembangSwiftUI",
+            dependencies: ["PalembangKit"],
+            path: "packages/swift/Sources/PalembangSwiftUI"
+        ),
         .testTarget(
             name: "PalembangKitTests",
             dependencies: ["PalembangKit"],
             path: "packages/swift/Tests/PalembangKitTests"
+        ),
+        .testTarget(
+            name: "PalembangSwiftUITests",
+            dependencies: ["PalembangKit", "PalembangSwiftUI"],
+            path: "packages/swift/Tests/PalembangSwiftUITests"
         ),
     ]
 )

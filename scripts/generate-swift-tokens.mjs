@@ -69,7 +69,7 @@ function stopsLiteral(stops) {
 
 function paintLiteral(name, paint, kind) {
   return (
-    `    static let ${name} = GradientPaint(\n` +
+    `    package static let ${name} = GradientPaint(\n` +
     `        kind: .${kind},\n` +
     `        opacity: ${swiftNumber(paint.opacity)},\n` +
     `        transform: ${transformLiteral(paint.transform)},\n` +
@@ -97,18 +97,22 @@ const output = `// GENERATED FILE. Do not edit by hand.
 // PalembangKit needs no runtime JSON loading, no network access, and no
 // filesystem dependency to render. tokens/palembang.v1.json remains the
 // authoritative source; this file must never be hand-edited.
+//
+// package access (Swift 5.9): visible to any target in this Swift package,
+// including PalembangSwiftUI, without becoming PalembangKit public API. See
+// CanonicalData.swift.
 
-enum CanonicalTokens {
-    static let horizonY: Double = ${swiftNumber(tokens.geometry.horizonY)}
-    static let upperHeight: Double = ${swiftNumber(tokens.geometry.upperHeight)}
-    static let lowerHeight: Double = ${swiftNumber(tokens.geometry.lowerHeight)}
+package enum CanonicalTokens {
+    package static let horizonY: Double = ${swiftNumber(tokens.geometry.horizonY)}
+    package static let upperHeight: Double = ${swiftNumber(tokens.geometry.upperHeight)}
+    package static let lowerHeight: Double = ${swiftNumber(tokens.geometry.lowerHeight)}
 
-    static let palette: [String: String] = ${paletteLiteral(tokens.palette)}
+    package static let palette: [String: String] = ${paletteLiteral(tokens.palette)}
 
 ${sky}
 ${seaBase}
 ${seaHaze}
-    static let seaHazeSmall320MiddleStopAlpha: Double = ${swiftNumber(smallOverride)}
+    package static let seaHazeSmall320MiddleStopAlpha: Double = ${swiftNumber(smallOverride)}
 
 ${seaGlow}
 }

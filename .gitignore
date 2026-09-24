@@ -18,6 +18,10 @@ dist/
 build/
 .cache/
 
+# Swift Package Manager
+.build/
+.swiftpm/
+
 # Generated/local output
 .tmp/
 tmp/

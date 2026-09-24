@@ -1,5 +1,42 @@
 # Changelog
 
+## Unreleased — PalembangSwiftUI / Apple Native Presentation (v0.8.0)
+
+Not released or tagged. Work in progress on top of the stable 0.7.0
+PalembangKit foundation.
+
+- Added a second Swift library product, `PalembangSwiftUI`, depending on
+  `PalembangKit`, with a public `PalembangView` SwiftUI view.
+- Native rendering only: draws canonical Palembang directly with Core
+  Graphics through a thin `UIViewRepresentable`/`NSViewRepresentable`
+  (`PalembangDrawingView`) — no WebKit, no HTML/JS, no rasterized PNG
+  masters, no screenshots, no bitmap stretching.
+- `PalembangView` reconstructs canonical geometry for whatever size SwiftUI
+  proposes (supports `.frame`/`.aspectRatio`, arbitrary aspect ratios, and
+  dynamic resizing); preserves the 50/50 horizon split, canonical gradient
+  transforms/stops/opacities/layer order, and the 320×320 haze exception.
+  See `packages/swift/Sources/PalembangSwiftUI/NativeRenderer.swift` for why
+  Core Graphics (not SwiftUI's high-level gradient APIs) was chosen to
+  preserve the exact Figma affine gradient transforms.
+- Reuses `PalembangPaletteToken` and `PalembangError` from PalembangKit — no
+  parallel palette-token or error type. Palette/haze overrides are validated
+  against the same rules as `Palembang.renderSVG`
+  (`PalembangView.validate(palette:hazeMiddleAlpha:)`).
+- Internally refactored PalembangKit's canonical data types and shared
+  gradient/palette/validation logic to Swift 5.9 `package` access, so
+  `PalembangSwiftUI` consumes the exact same canonical dataset and transform
+  math as the SVG renderer, with no second copy of tokens/transforms and no
+  runtime JSON parsing. PalembangKit's public API and SVG output are
+  unchanged; all existing 48 PalembangKit tests and the 10/10 Core↔Swift
+  byte-parity fixtures still pass.
+- Added `Tests/PalembangSwiftUITests` (render-plan/geometry/transform/stop/
+  opacity/palette/haze/immutability coverage against PalembangKit's own
+  canonical data) and `Examples/SwiftUIExample.swift` (source-level, not an
+  Xcode project).
+- Added `packages/swift/README-SwiftUI.md`.
+- No new external runtime dependencies; platform floor unchanged
+  (macOS 12+ / iOS 15+).
+
 ## 0.7.0 — 2026-09-24
 
 PalembangKit Swift SDK Foundation:

@@ -63,8 +63,9 @@ import { renderPalembangSvg } from "@palembang/core";
 
 **Building a Swift app?**
 Add [`PalembangKit`](packages/swift/README.md), the public SwiftPM SDK for
-canonical SVG/data rendering. SwiftUI and native Apple rendering are future
-adapter layers, not part of PalembangKit.
+canonical SVG/data rendering. [`PalembangSwiftUI`](packages/swift/README-SwiftUI.md)
+— a native SwiftUI presentation layer on top of PalembangKit — is under
+development for v0.8.0 and not yet released.
 
 Both packages render from the same canonical tokens as every other implementation — see [Using Palembang](#using-palembang) below for how they relate to each other and to the reference renderer.
 
@@ -173,8 +174,9 @@ Implementation and package status:
 | [Web Playground](implementations/web/README.md) | implemented and deployed |
 | [`@palembang/core`](packages/core/README.md) — JavaScript SDK | public on npm |
 | [`@palembang/cli`](packages/cli/README.md) — CLI & automation | public on npm |
-| [PalembangKit](packages/swift/README.md) — Swift SDK | public in v0.7.0 |
-| Native Canvas / SwiftUI visual implementations | future work |
+| [PalembangKit](packages/swift/README.md) — Swift SVG/data core | public in v0.7.0 |
+| [PalembangSwiftUI](packages/swift/README-SwiftUI.md) — native Apple presentation layer | under development for v0.8.0 |
+| Standalone iPhone/macOS apps | future work |
 
 ## Repository map
 
@@ -190,8 +192,8 @@ implementations/web/      deployed browser Playground (Standard/Custom/Wallpaper
 implementations/          canvas/, swiftui/ remain placeholders for future work
 packages/core/            @palembang/core — public JavaScript rendering SDK
 packages/cli/             @palembang/cli — public terminal/automation CLI
-packages/swift/           PalembangKit — public Swift SDK
-Package.swift             SwiftPM manifest for PalembangKit (repository root, per SwiftPM convention)
+packages/swift/           PalembangKit (public Swift SVG/data core) and PalembangSwiftUI (native Apple presentation layer, v0.8, under development)
+Package.swift             SwiftPM manifest for PalembangKit/PalembangSwiftUI (repository root, per SwiftPM convention)
 ```
 
 ## Contributing
@@ -210,5 +212,8 @@ Palembang can be rendered in the browser Playground, from terminals, servers,
 shell scripts, and CI with `@palembang/cli`, from JavaScript with
 `@palembang/core`, or from Swift with `PalembangKit`.
 
-SwiftUI and native Apple app layers remain future work on top of the verified
-PalembangKit core. See [`packages/swift/README.md`](packages/swift/README.md).
+`PalembangSwiftUI` — a native SwiftUI presentation layer on top of the
+verified PalembangKit core — is under development for v0.8.0 and not yet
+released. Standalone iPhone/macOS apps remain future work on top of that.
+See [`packages/swift/README.md`](packages/swift/README.md) and
+[`packages/swift/README-SwiftUI.md`](packages/swift/README-SwiftUI.md).

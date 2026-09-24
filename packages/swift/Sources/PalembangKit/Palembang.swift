@@ -68,23 +68,20 @@ public enum Palembang {
             throw PalembangError.invalidHeight(height)
         }
         for (token, value) in palette {
-            guard isValidHexColor(value) else {
+            guard PalembangValidation.isValidHexColor(value) else {
                 throw PalembangError.invalidColor(token: token, value: value)
             }
         }
         if let alpha = hazeMiddleAlpha {
-            guard alpha.isFinite, alpha >= 0, alpha <= 1 else {
+            guard PalembangValidation.isValidHazeMiddleAlpha(alpha) else {
                 throw PalembangError.invalidHazeMiddleAlpha(alpha)
             }
         }
 
-        // CanonicalTokens.palette is copied by value here; overriding a key
-        // on `mergedPalette` can never mutate CanonicalTokens.palette or
-        // canonicalPalette used by any other call.
-        var mergedPalette = CanonicalTokens.palette
-        for (token, value) in palette {
-            mergedPalette[token.rawValue] = value
-        }
+        // PalembangPalette.merged copies CanonicalTokens.palette by value;
+        // overriding a key on the result can never mutate CanonicalTokens.palette
+        // or canonicalPalette used by any other call.
+        let mergedPalette = PalembangPalette.merged(overrides: palette)
 
         return try Renderer.renderSVG(
             palette: mergedPalette,
@@ -93,15 +90,5 @@ public enum Palembang {
             attribution: attribution,
             hazeMiddleAlpha: hazeMiddleAlpha
         )
-    }
-
-    private static func isValidHexColor(_ value: String) -> Bool {
-        let bytes = Array(value.utf8)
-        guard bytes.count == 7, bytes[0] == UInt8(ascii: "#") else { return false }
-        return bytes.dropFirst().allSatisfy { byte in
-            (byte >= UInt8(ascii: "0") && byte <= UInt8(ascii: "9"))
-                || (byte >= UInt8(ascii: "A") && byte <= UInt8(ascii: "F"))
-                || (byte >= UInt8(ascii: "a") && byte <= UInt8(ascii: "f"))
-        }
     }
 }

@@ -116,26 +116,9 @@ enum Renderer {
     /// matrix(a b c d e f), identical to render.py's inverse_affine +
     /// svg_matrix and palembang.js's inverseAffine + svgMatrix.
     private static func svgMatrix(_ transform: AffineTransform) throws -> String {
-        let values = try inverseAffine(transform)
+        // Shared with PalembangSwiftUI's NativeRenderer — see GradientTransform.swift.
+        let values = try GradientTransform.inverseAffine(transform)
         let parts = try values.map { try SVGNumber.format($0) }
         return "matrix(\(parts.joined(separator: " ")))"
-    }
-
-    private static func inverseAffine(_ t: AffineTransform) throws -> [Double] {
-        let a = t.m00, b = t.m01, c = t.m02
-        let d = t.m10, e = t.m11, f = t.m12
-        let determinant = a * e - b * d
-        guard abs(determinant) >= 1e-15 else {
-            throw PalembangError.renderingFailed("gradient transform is not invertible")
-        }
-
-        let row00 = e / determinant
-        let row01 = -b / determinant
-        let row02 = (b * f - e * c) / determinant
-        let row10 = -d / determinant
-        let row11 = a / determinant
-        let row12 = (d * c - a * f) / determinant
-        // SVG matrix(a b c d e f) maps x'=a*x+c*y+e, y'=b*x+d*y+f.
-        return [row00, row10, row01, row11, row02, row12]
     }
 }

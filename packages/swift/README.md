@@ -31,10 +31,12 @@ reinterpretation of it (see "Renderer architecture" below).
 PalembangKit v0.7 is a **data and rendering core only**. It deliberately does
 not import SwiftUI, UIKit, AppKit, or WebKit, and does not ship a native
 visual renderer (Canvas, Core Graphics, Core Image, Metal, or a
-`WKWebView`/`UIImage`/`NSImage` wrapper) — see "Non-goals" below. A future
-release can add a `PalembangSwiftUI` product, or an Apple-native visual
-adapter, on top of this verified core without changing PalembangKit's public
-API.
+`WKWebView`/`UIImage`/`NSImage` wrapper) — see "Non-goals" below.
+
+**Update (v0.8, under development):** `PalembangSwiftUI` now exists as a
+second library product built on top of this verified core, adding a native
+SwiftUI `PalembangView`. It does not change PalembangKit's public API. See
+[`README-SwiftUI.md`](README-SwiftUI.md).
 
 ## Installation
 
@@ -219,8 +221,11 @@ PalembangKit v0.7 intentionally does **not** include:
 - an Xcode project or a full app.
 
 The goal of v0.7 is to validate the exact Swift data/renderer contract first.
-A native Apple visual adapter is future work built on top of this verified
-core, not part of this release.
+`PalembangSwiftUI` (v0.8, under development) is the native Apple visual
+adapter built on top of this verified core — see
+[`README-SwiftUI.md`](README-SwiftUI.md). PalembangKit itself still imports
+none of SwiftUI/UIKit/AppKit/WebKit; only the new `PalembangSwiftUI` target
+does.
 
 ## Relationship to the rest of the system
 
@@ -255,13 +260,15 @@ the PalembangKit package target.
 
 ## Stability
 
-This API is pre-1.0 and may change before a 1.0 release. `PalembangKit` is
-currently the only public product; `PalembangSwiftUI` and any native visual
-adapter are future work, not part of this API.
+This API is pre-1.0 and may change before a 1.0 release. `PalembangKit`
+remains the released, stable product; `PalembangSwiftUI` (v0.8) is under
+development — see [`README-SwiftUI.md`](README-SwiftUI.md) for its own
+stability notes.
 
 ## Related
 
 - [Palembang Graphic System](https://github.com/ybtiger107/palembang-graphic-system) — repository root
+- [`README-SwiftUI.md`](README-SwiftUI.md) — PalembangSwiftUI, the native SwiftUI presentation layer built on this package
 - [`@palembang/core`](../core/README.md) — the JavaScript SDK this Swift port mirrors
 - [`implementations/svg/README.md`](../../implementations/svg/README.md) — the Figma → SVG mapping this renderer reproduces
 - [`docs/specification.md`](../../docs/specification.md) — the canonical design/implementation specification
