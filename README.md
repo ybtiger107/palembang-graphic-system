@@ -14,6 +14,8 @@ its composition, horizon, and light preserved; its palette and texture free to c
 <br><br>
 
 [**Try Playground**](https://ybtiger107.github.io/palembang-graphic-system/) &nbsp;·&nbsp;
+[`@palembang/cli`](packages/cli/README.md) &nbsp;·&nbsp;
+[`@palembang/core`](packages/core/README.md) &nbsp;·&nbsp;
 [Latest Release](https://github.com/ybtiger107/palembang-graphic-system/releases/latest) &nbsp;·&nbsp;
 [Read Specification](docs/specification.md)
 
@@ -33,6 +35,34 @@ The artist's identity and personal details are intentionally not published.
 
 Palembang exists to preserve and carry forward the visual memory of that gift while translating it into a reusable digital graphic system.
 
+## Get started
+
+There are three ways to use Palembang, depending on what you're building:
+
+**No install — just want a graphic?**
+Open the [**Playground**](https://ybtiger107.github.io/palembang-graphic-system/) in a browser: pick a size, recolor it, export SVG or PNG. See [`implementations/web/README.md`](implementations/web/README.md).
+
+**Terminal, servers, CI?**
+Install [`@palembang/cli`](packages/cli/README.md) (public on npm):
+
+```sh
+npm install -g @palembang/cli
+palembang render --size 1920x1080 -o palembang.svg
+```
+
+**Building a JavaScript app?**
+Install [`@palembang/core`](packages/core/README.md) (public on npm):
+
+```sh
+npm install @palembang/core
+```
+
+```js
+import { renderPalembangSvg } from "@palembang/core";
+```
+
+Both packages render from the same canonical tokens as every other implementation — see [Using Palembang](#using-palembang) below for how they relate to each other and to the reference renderer.
+
 ## Canonical system
 
 Palembang separates what must stay fixed from what is free to change:
@@ -50,13 +80,14 @@ Full detail lives in:
 
 - [`docs/specification.md`](docs/specification.md) — the complete design and implementation specification
 - [`docs/design-philosophy.md`](docs/design-philosophy.md) — why the system preserves what it preserves
+- [`docs/implementation-guide.md`](docs/implementation-guide.md) — how to turn the canonical data into a new platform implementation
 - [`tokens/palembang.v1.json`](tokens/palembang.v1.json) — machine-readable geometry, gradients, and color values
 
 ## Use Palembang
 
 Palembang is meant to be used — in apps, websites, backgrounds, games, publications, and other creative work, including commercial projects.
 
-Graphics you generate with the [SVG reference renderer](implementations/svg/README.md), or download as SVG/PNG assets from a GitHub Release, are licensed under **[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)**: free to use, copy, redistribute, recolor, and adapt, commercially or non-commercially, with attribution. See [`VISUAL-LICENSE.md`](VISUAL-LICENSE.md) for the full scope and examples.
+Graphics you generate — with the [Playground](#playground), [`@palembang/cli`](packages/cli/README.md), [`@palembang/core`](packages/core/README.md), the [SVG reference renderer](implementations/svg/README.md), or SVG/PNG assets downloaded from a GitHub Release — are licensed under **[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)**: free to use, copy, redistribute, recolor, and adapt, commercially or non-commercially, with attribution. See [`VISUAL-LICENSE.md`](VISUAL-LICENSE.md) for the full scope and examples.
 
 Attribution example:
 
@@ -66,7 +97,7 @@ https://github.com/ybtiger107/palembang-graphic-system
 CC BY 4.0
 ```
 
-This is different from the **original painting, the reference photographs in `reference/`, the Figma master (`source/Palembang.fig`), and the canonical master assets in `assets/canonical/`** — those remain all rights reserved; publishing this repository does not grant reuse rights to them. See [`VISUAL-LICENSE.md`](VISUAL-LICENSE.md) and [`ARTWORK-RIGHTS.md`](ARTWORK-RIGHTS.md).
+This CC BY 4.0 grant covers **outputs you generate**. It does not extend to the **original painting, the reference photographs in `reference/`, the Figma master (`source/Palembang.fig`), or the preserved canonical master files in `assets/canonical/`** — those stay all rights reserved. They are visible in this public repository as reference and validation material, not as reusable assets; browsing or downloading them here does not itself grant reuse rights. If you want a Palembang graphic you can actually reuse, generate one yourself (see [Get started](#get-started)) rather than using a canonical file directly. See [`VISUAL-LICENSE.md`](VISUAL-LICENSE.md) and [`ARTWORK-RIGHTS.md`](ARTWORK-RIGHTS.md) for the full boundary.
 
 ## Playground
 
@@ -84,11 +115,11 @@ The browser [Playground](implementations/web/README.md) lets you explore, custom
 - settings and saved designs persist in your browser (`localStorage`), so they survive reloads or an accidental tab close;
 - one-click reset back to canonical Palembang for the design you're currently editing (saved designs are untouched).
 
-Playground exports and shared designs follow the same [CC BY 4.0](#use-palembang) terms as the SVG reference renderer. See [`implementations/web/README.md`](implementations/web/README.md) for the full sharing/saved-designs model and privacy details.
+Playground exports and shared designs follow the same [CC BY 4.0](#use-palembang) terms as every other official renderer. See [`implementations/web/README.md`](implementations/web/README.md) for the full sharing/saved-designs model and privacy details.
 
-## Generate Palembang
+## The reference renderer
 
-The canonical PNGs are the right choice when a ready-made raster is sufficient. For a different resolution or aspect ratio, or for scalable vector output, use the [SVG reference renderer](implementations/svg/README.md):
+Alongside the packages above, Palembang ships a dependency-free **Python SVG reference renderer** — the implementation the rest of the system is verified against:
 
 ```sh
 python3 implementations/svg/render.py \
@@ -97,41 +128,18 @@ python3 implementations/svg/render.py \
   --output Palembang.svg
 ```
 
-It reconstructs each target rectangle from the canonical tokens instead of stretching a bitmap. The renderer's source code is MIT-licensed; the SVG it generates is a usable output under CC BY 4.0 (see [Use Palembang](#use-palembang) above).
+It reconstructs each target rectangle from the canonical tokens instead of stretching a bitmap. The renderer's source code is MIT-licensed; the SVG it generates is a usable output under CC BY 4.0 (see [Use Palembang](#use-palembang) above). Most users building an app or running automation should prefer [`@palembang/core`](packages/core/README.md) or [`@palembang/cli`](packages/cli/README.md) instead — see [`implementations/svg/README.md`](implementations/svg/README.md) for when the Python renderer itself is the right choice (e.g. verifying a new platform implementation).
 
-### JavaScript Core SDK
+## Canonical reference assets
 
-Render Palembang directly from JavaScript with the dependency-free `@palembang/core` package:
-
-```sh
-npm install @palembang/core
-```
-
-```js
-import { renderPalembangSvg } from "@palembang/core";
-```
-
-The public npm packages are [`@palembang/core`](packages/core/) for JavaScript
-rendering and [`@palembang/cli`](packages/cli/) for terminal and automation
-workflows:
-
-```sh
-npm install -g @palembang/cli
-palembang render --size 1920x1080 -o palembang.svg
-```
-
-## Canonical assets
-
-If you just need the official Palembang graphic, use these directly rather than recreating them:
+`assets/canonical/png/` holds the completed PNG renders supplied by the maintainer. They are **preserved, all-rights-reserved reference and validation material** — the appearance every renderer is checked against — not a source of reusable graphics:
 
 - [`assets/canonical/png/Palembang.png`](assets/canonical/png/Palembang.png) — small square
 - [`assets/canonical/png/Palembang2560x1080.png`](assets/canonical/png/Palembang2560x1080.png) — wide
 - [`assets/canonical/png/Palembang2560x1664.png`](assets/canonical/png/Palembang2560x1664.png) — medium-wide
 - [`assets/canonical/png/Palembang2560x2560.png`](assets/canonical/png/Palembang2560x2560.png) — large square
 
-Filenames reflect the nominal Figma design size, not necessarily the encoded pixel size of the file — see [`assets/canonical/manifest.json`](assets/canonical/manifest.json) for the authoritative dimensions, hashes, and metadata of each asset.
-
-These files are preserved byte-for-byte. Resized, recolored, or otherwise derived images belong in `assets/variants/`, never in place of a canonical file.
+Filenames reflect the nominal Figma design size, not necessarily the encoded pixel size of the file — see [`assets/canonical/manifest.json`](assets/canonical/manifest.json) for the authoritative dimensions, hashes, and metadata of each asset. These files are preserved byte-for-byte and are not licensed for reuse (see [Use Palembang](#use-palembang)); if you need a graphic you can actually use, generate one at [Get started](#get-started). Resized, recolored, or otherwise derived images belong in `assets/variants/`, never in place of a canonical file.
 
 ## Using Palembang
 
@@ -146,33 +154,40 @@ Figma / source implementation
         ↓
 canonical assets
         ↓
-SVG / Web / Canvas / SwiftUI implementations
+reference renderer, packages, and platform implementations
 ```
 
 New platform implementations should be built from [`docs/specification.md`](docs/specification.md) and [`tokens/palembang.v1.json`](tokens/palembang.v1.json) — not approximated from screenshots of the canonical PNGs.
 
-Implementation status:
+Implementation and package status:
 
-| Platform | Status |
+| Component | Status |
 |---|---|
 | [SVG reference renderer](implementations/svg/README.md) | implemented and verified |
 | [Web Playground](implementations/web/README.md) | implemented and deployed |
-| JavaScript Core SDK (`packages/core/`) | released as `@palembang/core` |
-| Canvas / SwiftUI | future work |
+| [`@palembang/core`](packages/core/README.md) — JavaScript SDK | public on npm |
+| [`@palembang/cli`](packages/cli/README.md) — CLI & automation | public on npm |
+| Native Canvas / SwiftUI implementations | future work |
 
 ## Repository map
 
 ```text
-source/               canonical Figma source and extracted design data
-reference/             photographs of the physical painting (artistic reference)
-assets/canonical/      preserved, ready-to-use PNG renders
-assets/variants/        derived/resized/recolored outputs
-docs/                  specification, design philosophy, implementation guide
-tokens/                machine-readable design tokens
-implementations/svg/    verified Python SVG reference renderer
-implementations/web/    deployed browser Playground (Standard/Custom/Wallpaper, palette, SVG/PNG export)
-implementations/        canvas/, swiftui/ remain placeholders for future work
+source/                 canonical Figma source and extracted design data
+reference/               photographs of the physical painting (artistic reference)
+assets/canonical/        preserved, all-rights-reserved reference PNG renders
+assets/variants/          derived/resized/recolored outputs
+docs/                    specification, design philosophy, implementation guide
+tokens/                  machine-readable design tokens
+implementations/svg/      verified Python SVG reference renderer
+implementations/web/      deployed browser Playground (Standard/Custom/Wallpaper, palette, SVG/PNG export)
+implementations/          canvas/, swiftui/ remain placeholders for future work
+packages/core/            @palembang/core — public JavaScript rendering SDK
+packages/cli/             @palembang/cli — public terminal/automation CLI
 ```
+
+## Contributing
+
+New palettes, platform implementations, and packages are welcome. Start with [`CONTRIBUTING.md`](CONTRIBUTING.md) for how canonical-value changes, new renderers, and palette-only contributions are reviewed, and [`docs/implementation-guide.md`](docs/implementation-guide.md) for how to build a new platform implementation from the canonical tokens. See [`CHANGELOG.md`](CHANGELOG.md) for release history.
 
 ## Rights & stewardship
 

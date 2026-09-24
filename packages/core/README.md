@@ -5,8 +5,7 @@ Palembang Graphic System. It renders canonical Palembang SVG directly from
 JavaScript in modern browsers and Node.js ES modules — without the Playground,
 DOM, Figma, Python, or a runtime token fetch.
 
-The public package identity is `@palembang/core`. Version 0.5.0 is prepared
-locally but has not been published to npm yet.
+`@palembang/core` is public on npm. The current release is 0.5.0.
 
 ```sh
 npm install @palembang/core
@@ -86,10 +85,16 @@ against that Playground renderer and the Python parity suite.
 
 The SDK code is MIT-licensed. The embedded Palembang visual-system data and
 generated SVG output remain under CC BY 4.0. See [`LICENSE.md`](LICENSE.md),
-the repository [`VISUAL-LICENSE.md`](../../VISUAL-LICENSE.md), and the
-attribution metadata behavior above. This API is pre-1.0 and may change before
-the release is published.
+the repository [`VISUAL-LICENSE.md`](https://github.com/ybtiger107/palembang-graphic-system/blob/main/VISUAL-LICENSE.md),
+and the attribution metadata behavior above. This API is pre-1.0 and may
+change before a 1.0 release.
 
 There are zero runtime dependencies. The package does not include reference
 photographs, original artwork, Figma source, extracted source assets,
 canonical PNG masters, or Playground persistence/share state.
+
+## Related
+
+- [Palembang Graphic System](https://github.com/ybtiger107/palembang-graphic-system) — repository root, Playground, and full documentation
+- [`@palembang/cli`](https://github.com/ybtiger107/palembang-graphic-system/blob/main/packages/cli/README.md) — terminal/CI use of this SDK
+- [`docs/specification.md`](https://github.com/ybtiger107/palembang-graphic-system/blob/main/docs/specification.md) — the canonical design/implementation specification

@@ -7,4 +7,4 @@ These photographs document the physical painting that inspired the Palembang gra
 
 They are **artistic reference**, not pixel-perfect geometry sources. The canonical digital geometry is defined by `source/Palembang.fig` and `docs/specification.md`.
 
-The photographs and depicted artwork are excluded from the MIT code license. Rights remain with their respective rights holders unless separately licensed.
+The photographs and depicted artwork are excluded from the MIT code license and are not CC BY 4.0; they are all rights reserved. Rights remain with their respective rights holders unless separately licensed. See [`ARTWORK-RIGHTS.md`](../ARTWORK-RIGHTS.md) for provenance and [`VISUAL-LICENSE.md`](../VISUAL-LICENSE.md) for how this differs from the reusable CC BY 4.0 visual system described in the root [`README.md`](../README.md).

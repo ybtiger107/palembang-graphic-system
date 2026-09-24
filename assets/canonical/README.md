@@ -1,8 +1,12 @@
 # Canonical Raster Assets
 
-This directory contains the **completed Palembang PNG graphics supplied by the user**. They are first-class canonical raster assets, not previews.
+This directory contains the **completed Palembang PNG graphics supplied by the user**. They are first-class canonical raster assets, not previews — the authoritative appearance every renderer is validated against.
 
-Use these files directly whenever an application, website, document, mockup, or design task only needs an existing bitmap. Re-render from the specification only when a platform-native/vector implementation, a new aspect ratio, a palette variant, or an exact target resolution is required.
+## Rights
+
+These files are **all rights reserved**, not CC BY 4.0 (see [`VISUAL-LICENSE.md`](../../VISUAL-LICENSE.md)). Their presence in this public repository is for reference and validation, not reuse — publishing them here does not grant permission to use them in an application, website, document, or design. Repository tooling and tasks may read them directly as a ready-made bitmap source (see the root [`CLAUDE.md`](../../CLAUDE.md)/[`AGENTS.md`](../../AGENTS.md)); that is a workflow convenience, not a license. If you need a Palembang graphic you can actually reuse, generate your own with the [Playground](https://ybtiger107.github.io/palembang-graphic-system/), [`@palembang/cli`](../../packages/cli/README.md), [`@palembang/core`](../../packages/core/README.md), or the [SVG reference renderer](../../implementations/svg/README.md) — those outputs are CC BY 4.0. See the root [`README.md`](../../README.md#use-palembang) for the full explanation.
+
+Re-render from the specification instead of using a file here directly when a platform-native/vector implementation, a new aspect ratio, a palette variant, or an exact target resolution is required.
 
 ## Preserved files
 

@@ -54,3 +54,10 @@ The implementation does not add texture, clouds, waves, a sun disk, or a package
 ## Validation status
 
 `test_render.py` checks XML parsing, dimensions, the exact 50/50 seam, layer order, token-derived structure, the 320 haze exception, arbitrary sizes, and deterministic serialization. `scripts/verify.py` protects all preserved canonical files. Using the already-installed `librsvg-2.so.2` library, rasterized outputs were visually inspected and compared at all four stored canonical bitmap sizes; mean absolute RGB differences were 0.833 (320), 0.426 (wide), 0.449 (medium), and 0.457 (square). Differences are expected from Figma/librsvg interpolation and the medium asset's rounded stored height (`2048×1331`).
+
+## Related
+
+- [Palembang Graphic System](../../README.md) — repository root and licensing
+- [`docs/specification.md`](../../docs/specification.md) — canonical geometry and gradient definitions this renderer implements
+- [`implementations/web/README.md`](../web/README.md) — the browser Playground, a JavaScript port of this renderer
+- [`packages/core/README.md`](../../packages/core/README.md) — the JavaScript SDK built from the same renderer logic

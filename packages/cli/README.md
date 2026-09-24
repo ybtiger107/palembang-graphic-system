@@ -2,8 +2,8 @@
 
 `@palembang/cli` is the official command-line interface for rendering
 Palembang SVGs in terminals, servers, shell scripts, SSH sessions, and CI.
-It delegates rendering to [`@palembang/core`](../core/README.md); it does not
-contain a second renderer and does not provide PNG output.
+It delegates rendering to [`@palembang/core`](https://github.com/ybtiger107/palembang-graphic-system/blob/main/packages/core/README.md);
+it does not contain a second renderer and does not provide PNG output.
 
 ## Requirements and installation
 
@@ -64,7 +64,7 @@ Supported tokens are `sky.hot`, `sky.cool`, `sea.light`, `sea.dark`,
 
 Attribution metadata is included by default. `--no-attribution` removes only
 the embedded SVG metadata; it does not remove the user's CC BY 4.0 attribution
-obligation. See [`VISUAL-LICENSE.md`](../../VISUAL-LICENSE.md).
+obligation. See [`VISUAL-LICENSE.md`](https://github.com/ybtiger107/palembang-graphic-system/blob/main/VISUAL-LICENSE.md).
 
 `--haze-middle-alpha NUMBER` exposes the existing core option and accepts a
 value from `0` through `1`.
@@ -82,4 +82,9 @@ should use this executable boundary.
 
 The CLI code is MIT-licensed. Generated Palembang SVG output is covered by
 the repository's CC BY 4.0 terms and requires attribution. See
-[`LICENSE.md`](LICENSE.md) and [`VISUAL-LICENSE.md`](../../VISUAL-LICENSE.md).
+[`LICENSE.md`](LICENSE.md) and [`VISUAL-LICENSE.md`](https://github.com/ybtiger107/palembang-graphic-system/blob/main/VISUAL-LICENSE.md).
+
+## Related
+
+- [Palembang Graphic System](https://github.com/ybtiger107/palembang-graphic-system) — repository root, Playground, and full documentation
+- [`docs/specification.md`](https://github.com/ybtiger107/palembang-graphic-system/blob/main/docs/specification.md) — the canonical design/implementation specification
