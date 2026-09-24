@@ -10,6 +10,17 @@
 //
 // Regenerate by re-running the fixture capture described in
 // packages/swift/README.md against the current packages/core release.
+//
+// IMPORTANT — trailing newline: @palembang/core's renderPalembangSvg (and
+// Renderer.renderSVG in this package) always terminate the SVG with a
+// final "</svg>\n". Swift multiline string literals ("""..."""), however,
+// do NOT include the line break immediately before the closing """
+// delimiter — so a literal whose last content line is "</svg>" silently
+// yields a string with no trailing LF. Each fixture below therefore ends
+// its multiline literal one line early and appends the dropped LF back
+// explicitly with + "\n", rather than relying on an easy-to-miss blank
+// line before the closing """. Do not "simplify" this back to a bare
+// multiline literal — that reintroduces the missing-LF bug.
 
 import XCTest
 @testable import PalembangKit
@@ -47,7 +58,7 @@ final class ParityTests: XCTestCase {
   <rect id="sea-haze-field" x="0" y="540" width="1920" height="540" fill="url(#sea-haze)" opacity="0.44999998807907104"/>
   <rect id="sea-glow-field" x="0" y="540" width="1920" height="540" fill="url(#sea-glow)" opacity="0.6000000238418579"/>
 </svg>
-"""
+""" + "\n"
         XCTAssertEqual(try Palembang.renderSVG(width: 1920, height: 1080), expected)
     }
 
@@ -82,7 +93,7 @@ final class ParityTests: XCTestCase {
   <rect id="sea-haze-field" x="0" y="500" width="1000" height="500" fill="url(#sea-haze)" opacity="0.44999998807907104"/>
   <rect id="sea-glow-field" x="0" y="500" width="1000" height="500" fill="url(#sea-glow)" opacity="0.6000000238418579"/>
 </svg>
-"""
+""" + "\n"
         XCTAssertEqual(try Palembang.renderSVG(width: 1000, height: 1000), expected)
     }
 
@@ -117,7 +128,7 @@ final class ParityTests: XCTestCase {
   <rect id="sea-haze-field" x="0" y="160" width="320" height="160" fill="url(#sea-haze)" opacity="0.44999998807907104"/>
   <rect id="sea-glow-field" x="0" y="160" width="320" height="160" fill="url(#sea-glow)" opacity="0.6000000238418579"/>
 </svg>
-"""
+""" + "\n"
         XCTAssertEqual(try Palembang.renderSVG(width: 320, height: 320), expected)
     }
 
@@ -152,7 +163,7 @@ final class ParityTests: XCTestCase {
   <rect id="sea-haze-field" x="0" y="288.5" width="833" height="288.5" fill="url(#sea-haze)" opacity="0.44999998807907104"/>
   <rect id="sea-glow-field" x="0" y="288.5" width="833" height="288.5" fill="url(#sea-glow)" opacity="0.6000000238418579"/>
 </svg>
-"""
+""" + "\n"
         XCTAssertEqual(try Palembang.renderSVG(width: 833, height: 577), expected)
     }
 
@@ -187,7 +198,7 @@ final class ParityTests: XCTestCase {
   <rect id="sea-haze-field" x="0" y="540" width="1920" height="540" fill="url(#sea-haze)" opacity="0.44999998807907104"/>
   <rect id="sea-glow-field" x="0" y="540" width="1920" height="540" fill="url(#sea-glow)" opacity="0.6000000238418579"/>
 </svg>
-"""
+""" + "\n"
         XCTAssertEqual(try Palembang.renderSVG(width: 1920, height: 1080, palette: [.skyHot: "#D97706"]), expected)
     }
 
@@ -222,7 +233,7 @@ final class ParityTests: XCTestCase {
   <rect id="sea-haze-field" x="0" y="450" width="1600" height="450" fill="url(#sea-haze)" opacity="0.44999998807907104"/>
   <rect id="sea-glow-field" x="0" y="450" width="1600" height="450" fill="url(#sea-glow)" opacity="0.6000000238418579"/>
 </svg>
-"""
+""" + "\n"
         XCTAssertEqual(try Palembang.renderSVG(width: 1600, height: 900, palette: [.skyHot: "#D97706", .seaGlow: "#22D3EE"]), expected)
     }
 
@@ -256,7 +267,7 @@ final class ParityTests: XCTestCase {
   <rect id="sea-haze-field" x="0" y="540" width="1920" height="540" fill="url(#sea-haze)" opacity="0.44999998807907104"/>
   <rect id="sea-glow-field" x="0" y="540" width="1920" height="540" fill="url(#sea-glow)" opacity="0.6000000238418579"/>
 </svg>
-"""
+""" + "\n"
         XCTAssertEqual(try Palembang.renderSVG(width: 1920, height: 1080, attribution: false), expected)
     }
 
@@ -291,7 +302,7 @@ final class ParityTests: XCTestCase {
   <rect id="sea-haze-field" x="0" y="240" width="640" height="240" fill="url(#sea-haze)" opacity="0.44999998807907104"/>
   <rect id="sea-glow-field" x="0" y="240" width="640" height="240" fill="url(#sea-glow)" opacity="0.6000000238418579"/>
 </svg>
-"""
+""" + "\n"
         XCTAssertEqual(try Palembang.renderSVG(width: 640, height: 480, hazeMiddleAlpha: 0.8), expected)
     }
 
@@ -326,7 +337,16 @@ final class ParityTests: XCTestCase {
   <rect id="sea-haze-field" x="0" y="160" width="320" height="160" fill="url(#sea-haze)" opacity="0.44999998807907104"/>
   <rect id="sea-glow-field" x="0" y="160" width="320" height="160" fill="url(#sea-glow)" opacity="0.6000000238418579"/>
 </svg>
-"""
+""" + "\n"
         XCTAssertEqual(try Palembang.renderSVG(width: 320, height: 320, hazeMiddleAlpha: 0.8), expected)
+    }
+
+    /// Guards the serialization contract the fix above depends on: every
+    /// renderer in this repository (render.py, palembang.js, @palembang/core,
+    /// and Renderer.swift) terminates its SVG output with a single trailing
+    /// LF. This must not regress silently.
+    func testRenderedSvgEndsWithTrailingNewline() throws {
+        let svg = try Palembang.renderSVG(width: 1920, height: 1080)
+        XCTAssertTrue(svg.hasSuffix("\n"))
     }
 }
