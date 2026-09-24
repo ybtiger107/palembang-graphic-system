@@ -81,6 +81,7 @@ Full detail lives in:
 - [`docs/specification.md`](docs/specification.md) — the complete design and implementation specification
 - [`docs/design-philosophy.md`](docs/design-philosophy.md) — why the system preserves what it preserves
 - [`docs/implementation-guide.md`](docs/implementation-guide.md) — how to turn the canonical data into a new platform implementation
+- [`docs/source-inventory.md`](docs/source-inventory.md) — preserved source, canonical assets, and reference-material inventory
 - [`tokens/palembang.v1.json`](tokens/palembang.v1.json) — machine-readable geometry, gradients, and color values
 
 ## Use Palembang

@@ -46,7 +46,7 @@ The user supplied four finished PNG graphics. They are preserved byte-for-byte u
 
 The stored dimensions above are the actual bytes received in this project. The filenames are intentionally unchanged. The manifest at `assets/canonical/manifest.json` records dimensions, aspect ratio, SHA-256, byte length, image mode, and available embedded metadata.
 
-Agents and applications may directly reuse these PNGs whenever a raster asset is sufficient. Derived/resized/recolored files must be written elsewhere rather than replacing these files.
+Agents and applications may inspect these PNGs for validation or authorized internal workflows. They are not reusable application assets; derived/resized/recolored files must be written elsewhere rather than replacing these files.
 
 ## Reference photographs
 
