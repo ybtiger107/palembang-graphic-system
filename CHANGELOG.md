@@ -1,5 +1,36 @@
 # Changelog
 
+## Unreleased — planned v0.7.0
+
+PalembangKit / Swift SDK Foundation (in development, not yet released or
+tagged):
+
+- Added `PalembangKit`, a dependency-free Swift Package foundation for future
+  iPhone and macOS Palembang apps — no JavaScript, Node, Python, DOM, WebKit,
+  network access, or runtime token fetching.
+- Added synchronous canonical SVG generation (`Palembang.renderSVG`) that
+  reproduces the same renderer contract as `implementations/svg/render.py`
+  and `@palembang/core`/`implementations/web/palembang.js`: 50/50 horizon,
+  per-target-rectangle reconstruction, canonical gradient types and inverse-
+  affine transform math, gradient IDs, stop order, opacities, layer order,
+  the 320×320 haze exception, and arbitrary positive target dimensions.
+- Added deterministic generated canonical token data
+  (`CanonicalTokens.generated.swift`, via `scripts/generate-swift-tokens.mjs`
+  with a `--check` drift mode) compiled in from `tokens/palembang.v1.json` —
+  no runtime JSON loading, no filesystem access, no network access inside
+  PalembangKit.
+- Established this as the foundation a future `PalembangSwiftUI` product and
+  native Apple visual adapter (Canvas/Core Graphics/Metal) can build on
+  without changing PalembangKit's core API; no SwiftUI/UIKit/AppKit/WebKit
+  imports and no native visual renderer are part of this release.
+- Added cross-renderer parity tests comparing `Palembang.renderSVG` output
+  byte-for-byte against `@palembang/core` for representative cases (wide,
+  square, the 320×320 exception, custom aspect ratios, palette overrides,
+  attribution on/off, explicit haze alpha).
+- `Package.swift` added at the repository root (SwiftPM Git-dependency
+  convention) with Swift sources under `packages/swift/`; existing JS
+  packages and repository layout otherwise unchanged.
+
 ## 0.6.0 — 2026-09-24
 
 CLI & Automation: released the official `@palembang/cli` package with
